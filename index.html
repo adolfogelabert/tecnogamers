@@ -690,13 +690,90 @@
 
     </div>
 
-    <!-- Overlay oscuro semitransparente detrás del carrito (click para cerrar) -->
+    <!-- Overlay del carrito -->
     <div id="cart-overlay" onclick="toggleCart()" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"></div>
+
+    <!-- MODAL DETALLE DE PRODUCTO -->
+    <div id="product-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300" onclick="closeProductModal()"></div>
+        <div class="relative bg-brand-darkBg border border-brand-accentGray rounded-3xl w-full max-w-xl max-h-[85vh] overflow-y-auto shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modal-box">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 p-2 rounded-xl bg-brand-darkCard/80 border border-brand-accentGray text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
     <div id="toast-container" class="fixed bottom-20 right-6 z-50 space-y-3 pointer-events-none"></div>
     <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-brand-orange hover:bg-brand-orangeHover text-white rounded-full flex items-center justify-center shadow-lg shadow-brand-orange/30 transition-all duration-300 border-2 border-brand-darkBg" title="Volver arriba">
         <i class="fa-solid fa-arrow-up text-lg"></i>
     </button>
     <script>
+        // === MODAL DETALLE DE PRODUCTO ===
+        function showProductDetail(productId) {
+            const product = PRODUCTS_DATABASE.find(p => p.id === productId);
+            if (!product) return;
+
+            const modal = document.getElementById('product-modal');
+            const box = document.getElementById('modal-box');
+            const content = document.getElementById('modal-content');
+
+            content.innerHTML = `
+                <div class="relative">
+                    <div class="w-full h-48 sm:h-56 overflow-hidden bg-brand-darkCard rounded-t-3xl">
+                        <img src="${product.image}" alt="[Imagen de ${product.name}]" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80';">
+                    </div>
+                    <span class="absolute top-4 left-4 bg-brand-orange/90 text-white font-tech text-xs uppercase px-3 py-1.5 rounded-lg tracking-wider font-bold">
+                        ${product.badge}
+                    </span>
+                </div>
+                <div class="p-5 sm:p-7 space-y-4">
+                    <div>
+                        <h2 class="font-orbitron font-bold text-xl sm:text-2xl text-white uppercase tracking-tight line-clamp-2">${product.name}</h2>
+                        <p class="text-gray-400 mt-3 leading-relaxed text-sm line-clamp-3">${product.desc}</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-1">
+                        <div>
+                            <span class="text-xs text-gray-500 uppercase block mb-1">Precio Especial</span>
+                            <span class="font-orbitron font-extrabold text-2xl sm:text-3xl text-brand-orange text-glow">S/. ${product.price.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                        <button onclick="addToCart(${product.id}); closeProductModal();" class="flex-1 bg-brand-orange hover:bg-brand-orangeHover text-white font-tech font-bold uppercase tracking-widest py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 active:scale-95">
+                            <i class="fa-solid fa-cart-plus"></i> Añadir al Carrito
+                        </button>
+                        <a href="https://wa.me/51999999999?text=${encodeURIComponent('Hola! Me interesa el producto: ' + product.name + ' - S/. ' + product.price.toFixed(2))}" target="_blank" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-tech font-bold uppercase tracking-widest py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 text-center">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            requestAnimationFrame(() => {
+                box.classList.remove('scale-95', 'opacity-0');
+                box.classList.add('scale-100', 'opacity-100');
+            });
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            const box = document.getElementById('modal-box');
+            box.classList.add('scale-95', 'opacity-0');
+            box.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }, 300);
+        }
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProductModal();
+            }
+        });
+
         // === SCROLL SUAVE PERSONALIZADO ===
         // Función principal: desplazamiento animado con easing cúbico (~1200ms)
         function smoothScrollTo(target) {
@@ -769,7 +846,7 @@
                 price: 2499.00,
                 desc: "Consola PS5 de formato Slim con almacenamiento de 1TB SSD ultra rápido y lector de discos físico.",
                 badge: "Consolas",
-                image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=500&q=80"
+                image: "images/productos/ps5-slim.jpg"
             },
             {
                 id: 2,
@@ -778,7 +855,7 @@
                 price: 269.00,
                 desc: "Los Spideys Peter Parker y Miles Morales regresan para una espectacular aventura épica en Nueva York.",
                 badge: "Videojuegos",
-                image: "https://images.unsplash.com/photo-1608889175123-8ec330b86f84?auto=format&fit=crop&w=500&q=80"
+                image: "images/productos/spiderman-2.jpg"
             },
             {
                 id: 3,
@@ -787,7 +864,7 @@
                 price: 249.00,
                 desc: "Explora las profundidades, las tierras y los cielos de Hyrule en esta magnífica y galardonada obra maestra.",
                 badge: "Videojuegos",
-                image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=500&q=80"
+                image: "images/productos/zelda-totk.jpg"
             },
             {
                 id: 4,
@@ -796,7 +873,7 @@
                 price: 65.00,
                 desc: "Figura coleccionable oficial de Dragon Ball Super con excelentes detalles y acabados metálicos.",
                 badge: "Funko Pop",
-                image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80"
+                image: "images/productos/funko-goku.jpg"
             },
             {
                 id: 5,
@@ -805,7 +882,7 @@
                 price: 75.00,
                 desc: "Edición especial limitada con sable de luz reactivo que brilla en la oscuridad. ¡Exclusivo!",
                 badge: "Funko Pop",
-                image: "https://images.unsplash.com/photo-1559535332-db99e537e144?auto=format&fit=crop&w=500&q=80"
+                image: "images/productos/funko-darth.jpg"
             },
             {
                 id: 6,
@@ -814,7 +891,7 @@
                 price: 55.00,
                 desc: "Polo de algodón premium suave con diseño y logotipo corporativo de Tecno Gamers.",
                 badge: "Camisetas",
-                image: "camiseta-man.jpg"
+                image: "images/productos/camiseta-classic.jpg"
             },
             {
                 id: 7,
@@ -823,7 +900,7 @@
                 price: 55.00,
                 desc: "Camiseta premium de alta durabilidad con espectacular diseño artístico en la espalda.",
                 badge: "Camisetas",
-                image: "13217126_109996649418264_1435484065589441872_o.jpg"
+                image: "images/productos/camiseta-goku.jpg"
             },
             {
                 id: 8,
@@ -832,7 +909,7 @@
                 price: 189.00,
                 desc: "Cremalleras selladas contra la lluvia, puerto USB de carga externa integrado y compartimento acolchado para PS5 o laptop.",
                 badge: "Accesorios",
-                image: "LOGO TECNOGAMERS-PERU.jpg"
+                image: "images/productos/mochila-gaming.jpg"
             }
         ];
 
@@ -883,7 +960,7 @@
                 const encodedName = encodeURIComponent(product.name).replace(/'/g, '%27');
 
                 productCard.innerHTML = `
-                    <div class="relative aspect-square overflow-hidden bg-brand-darkBg flex items-center justify-center p-4">
+                    <div class="relative aspect-square overflow-hidden bg-brand-darkBg flex items-center justify-center p-4 cursor-pointer" onclick="showProductDetail(${product.id})">
                         <span class="absolute top-3 left-3 bg-brand-orange/20 border border-brand-orange/45 text-brand-orange font-tech text-xs uppercase px-2.5 py-1 rounded-md tracking-wider z-10">
                             ${product.badge}
                         </span>
@@ -892,7 +969,7 @@
                     </div>
 
                     <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
+                        <div class="cursor-pointer" onclick="showProductDetail(${product.id})">
                             <h3 class="font-orbitron font-bold text-white text-base tracking-wide line-clamp-1 group-hover:text-brand-orange transition-colors">${product.name}</h3>
                             <p class="text-xs text-gray-400 mt-1 line-clamp-2">${product.desc}</p>
                         </div>
