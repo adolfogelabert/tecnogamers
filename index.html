@@ -89,6 +89,11 @@
             transform: translateY(-4px);
         }
 
+        @supports (bottom: env(safe-area-inset-bottom)) {
+            #back-to-top { bottom: calc(1.5rem + env(safe-area-inset-bottom)); }
+            #toast-container { bottom: calc(5rem + env(safe-area-inset-bottom)); }
+        }
+
     </style>
 </head>
 <body class="bg-brand-darkBg text-gray-100 font-sans selection:bg-brand-orange selection:text-white overflow-x-hidden">
@@ -104,7 +109,7 @@
                         <img src="logo-tecnogamers.jpg" alt="[Imagen de Logo Tecno Gamers]" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=100&q=80';">
                     </div-->
                     <div class="logo-tecno">
-                        <img src="images/logo_tecnogamers_1_f_oscuro.png" alt="logo tecnogamers" style="height: 90px;" >
+                        <img src="images/logo_tecnogamers_1_f_oscuro.png" alt="logo tecnogamers" class="h-14 sm:h-16 md:h-20">
                     </div>
                     <!--div>
                         <span class="font-orbitron font-extrabold text-lg tracking-wider text-white flex items-center gap-1.5">
@@ -186,7 +191,7 @@
                 </p>
 
                 <!-- Core Features Fast Badges -->
-                <div class="grid grid-cols-3 gap-3 w-full max-w-lg pt-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full max-w-lg pt-4">
                     <div class="bg-brand-darkCard/80 border border-brand-accentGray rounded-xl p-3 text-center">
                         <i class="fa-solid fa-gamepad text-brand-orange text-xl mb-1"></i>
                         <h4 class="text-xs font-bold font-tech uppercase text-white">Videojuegos</h4>
@@ -300,14 +305,14 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <!-- === PANEL IZQUIERDO: Vista previa de la camiseta en tiempo real === -->
-                <div class="lg:col-span-6 flex flex-col items-center justify-center bg-brand-darkBg/90 border border-brand-accentGray rounded-3xl p-6 sm:p-12 relative overflow-hidden min-h-[450px]">
+                <div class="lg:col-span-6 flex flex-col items-center justify-center bg-brand-darkBg/90 border border-brand-accentGray rounded-3xl p-6 sm:p-12 relative overflow-hidden min-h-[350px] sm:min-h-[450px]">
                     <!-- Etiqueta "Previsualización en tiempo real" -->
                     <div class="absolute top-4 left-4 bg-brand-orange/15 border border-brand-orange/30 text-brand-orange font-tech text-xs uppercase px-3 py-1 rounded-md tracking-wider">
                         Previsualización en tiempo real
                     </div>
 
                     <!-- Contenedor de la camiseta SVG + estampa superpuesta -->
-                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 transition-all duration-500" id="shirt-model-container">
+                    <div class="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 transition-all duration-500" id="shirt-model-container">
                         <!-- SVG de la silueta de camiseta (color cambia según selección) -->
                         <svg id="svg-tshirt" class="w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]" viewBox="0 0 24 24" fill="currentColor" style="color: #0d0d0d; transition: color 0.4s ease;">
                             <path d="M12,2A3,3 0 0,0 9,5H5A2,2 0 0,0 3,7V12A2,2 0 0,0 5,14H6V20A2,2 0 0,0 8,22H16A2,2 0 0,0 18,20V14H19A2,2 0 0,0 21,12V7A2,2 0 0,0 19,5H15A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5H11A1,1 0 0,1 12,4M5,7H8V12H5V7M19,7V12H16V7H19Z"/>
@@ -352,7 +357,7 @@
                     <!-- PASO 1: Seleccionar color de camiseta (Negro, Naranja, Blanco) -->
                     <div>
                         <span class="text-xs font-bold uppercase tracking-wider font-orbitron text-brand-orange block mb-3">Paso 1: Color de la Camiseta</span>
-                        <div class="flex gap-4">
+                        <div class="flex flex-wrap gap-4">
                             <!-- Black Color Selector -->
                             <button onclick="changeShirtColor('#0D0D0D', 'Negro')" class="color-btn active group flex items-center gap-2.5 bg-brand-darkBg border-2 border-brand-orange px-4 py-3 rounded-2xl transition-all duration-200">
                                 <span class="w-6 h-6 rounded-full bg-[#0D0D0D] border border-white/20 block"></span>
@@ -472,7 +477,7 @@
                     </blockquote>
 
                     <!-- Contadores de métricas: Clientes Felices, Funko Pops, Garantía -->
-                    <div class="grid grid-cols-3 gap-4 pt-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
                         <div class="text-center p-4 bg-brand-darkCard/60 border border-brand-accentGray rounded-2xl">
                             <span class="font-orbitron font-black text-2xl sm:text-3xl text-brand-orange text-glow block">10K+</span>
                             <span class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest font-semibold block mt-1">Clientes Felices</span>
@@ -550,9 +555,9 @@
                                 soporte@tecnogamers.com
                             </a>
                             <div class="flex items-center gap-4 pt-3">
-                                <a href="#" class="w-8 h-8 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook"></i></a>
-                                <a href="#" class="w-8 h-8 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
-                                <a href="#" class="w-8 h-8 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-tiktok"></i></a>
                             </div>
                         </div>
 
@@ -622,7 +627,7 @@
                 </div-->
 
                 <div class="logo-tecno">
-                        <img src="images/logo_tecnogamers_1_f_oscuro.png" alt="logo tecnogamers" style="height: 90px;" >
+                        <img src="images/logo_tecnogamers_1_f_oscuro.png" alt="logo tecnogamers" class="h-14 sm:h-16 md:h-20">
                 </div>
             </div>
 
@@ -649,7 +654,7 @@
                 <i class="fa-solid fa-cart-shopping text-brand-orange text-xl"></i>
                 <h3 class="font-orbitron font-bold text-white text-lg uppercase">Tu Pedido</h3>
             </div>
-            <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-2xl transition-colors">
+            <button onclick="toggleCart()" class="p-2 text-gray-400 hover:text-white text-2xl transition-colors rounded-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
@@ -989,6 +994,7 @@
             const overlay = document.getElementById('cart-overlay');
             drawer.classList.toggle('translate-x-full');
             overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
         }
 
         // Actualizar interfaz del carrito: items, total y badge del contador
@@ -1031,9 +1037,9 @@
 
                     <div class="flex flex-col items-center gap-1">
                         <div class="flex items-center border border-brand-accentGray rounded-lg overflow-hidden">
-                            <button onclick="decrementItem(${index})" class="px-2 py-1 bg-brand-darkBg text-xs text-gray-400 hover:text-white">-</button>
+                            <button onclick="decrementItem(${index})" class="w-8 h-8 flex items-center justify-center bg-brand-darkBg text-xs text-gray-400 hover:text-white">-</button>
                             <span class="px-2.5 text-xs text-white">${item.quantity}</span>
-                            <button onclick="incrementItem(${index})" class="px-2 py-1 bg-brand-darkBg text-xs text-gray-400 hover:text-white">+</button>
+                            <button onclick="incrementItem(${index})" class="w-8 h-8 flex items-center justify-center bg-brand-darkBg text-xs text-gray-400 hover:text-white">+</button>
                         </div>
                         <button onclick="removeItem(${index})" class="text-[10px] text-red-500 hover:underline">Eliminar</button>
                     </div>
@@ -1125,7 +1131,7 @@
         function showToast(message, type = "success") {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = `p-4 rounded-xl border shadow-xl flex items-center gap-3 text-sm font-semibold transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto max-w-sm ${
+            toast.className = `p-4 rounded-xl border shadow-xl flex items-center gap-3 text-sm font-semibold transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto max-w-[calc(100vw-3rem)] sm:max-w-sm ${
                 type === 'success' 
                     ? 'bg-green-950/90 border-green-500/50 text-green-300' 
                     : 'bg-brand-darkCard border-brand-orange/40 text-brand-orange'
@@ -1205,6 +1211,7 @@
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
             menu.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
             
             if (menu.classList.contains('hidden')) {
                 icon.className = "fa-solid fa-bars-staggered text-xl";
@@ -1212,6 +1219,16 @@
                 icon.className = "fa-solid fa-xmark text-xl text-brand-orange";
             }
         }
+
+        // Cerrar menú móvil si se redimensiona a desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                const menu = document.getElementById('mobile-menu');
+                if (!menu.classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            }
+        });
     </script>
 </body>
 </html>
