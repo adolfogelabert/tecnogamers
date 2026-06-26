@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecno Gamers - Technology Games Shop Peru</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#FF4500',      // Naranja corporativo vibrante
+                            orangeHover: '#E03A00', // Naranja hover oscuro
+                            darkBg: '#09090B',      // Fondo oscuro cyberpunk
+                            darkCard: '#151518',    // Fondo de tarjetas
+                            accentGray: '#242428',  // Gris de acento/borde
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Rajdhani', 'sans-serif'],
+                        orbitron: ['Orbitron', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === ESTILOS PERSONALIZADOS === */
+        html {
+            scroll-behavior: auto; /* Desactivar scroll-behavior nativo, se usa JS custom */
+        }
+
+        /* Efecto de brillo neon en textos naranjas */
+        .text-glow {
+            text-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
+        }
+        /* Sombra naranja suave para tarjetas y contenedores */
+        .box-glow {
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.25);
+        }
+        /* Sombra naranja intensa para botones principales */
+        .box-glow-strong {
+            box-shadow: 0 0 35px rgba(255, 69, 0, 0.45);
+        }
+
+        /* === BARRA DE SCROLL PERSONALIZADA (temática gamer) === */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF4500;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E03A00;
+        }
+
+        /* === BOTÓN "VOLVER ARRIBA" - animación de aparición/desaparición === */
+        #back-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #back-to-top:hover {
+            transform: translateY(-4px);
+        }
+
+    </style>
+</head>
+<body class="bg-brand-darkBg text-gray-100 font-sans selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <!-- HEADER & NAVBAR -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="navbar">
+        <div class="backdrop-blur-md bg-brand-darkBg/80 border-b border-brand-accentGray/50 px-4 py-3 lg:px-8">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                
+                <!-- Logo -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <!--div class="relative w-12 h-12 overflow-hidden rounded-xl border border-brand-orange/40 group-hover:border-brand-orange transition-all duration-300">
+                        <img src="logo-tecnogamers.jpg" alt="[Imagen de Logo Tecno Gamers]" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=100&q=80';">
+                    </div-->
+                    <div class="logo-tecno">
+                        <img src="images/logo_tecnogamers_1_f_oscuro.png" alt="logo tecnogamers" style="height: 90px;" >
+                    </div>
+                    <!--div>
+                        <span class="font-orbitron font-extrabold text-lg tracking-wider text-white flex items-center gap-1.5">
+                            TECNO <span class="text-brand-orange text-glow">GAMERS</span>
+                        </span>
+                        <p class="text-[9px] text-gray-400 tracking-widest font-tech -mt-1">TECHNOLOGY GAMES SHOP / PERÚ</p>
+                    </div-->
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 font-tech text-lg uppercase tracking-wider">
+                    <a href="#inicio" class="text-white hover:text-brand-orange transition-colors duration-200">Inicio</a>
+                    <a href="#productos" class="text-gray-300 hover:text-brand-orange transition-colors duration-200">Catálogo</a>
+                    <a href="#camisetas" class="text-gray-300 hover:text-brand-orange transition-colors duration-200">Camisetas</a>
+                    <a href="#nosotros" class="text-gray-300 hover:text-brand-orange transition-colors duration-200">Nosotros</a>
+                    <a href="#contacto" class="text-gray-300 hover:text-brand-orange transition-colors duration-200">Ubicación</a>
+                </nav>
+
+                <!-- Right Side Actions -->
+                <div class="flex items-center gap-4">
+                    <!-- Cart Button Trigger -->
+                    <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-brand-darkCard hover:bg-brand-accentGray border border-brand-accentGray text-white transition-all duration-200">
+                        <i class="fa-solid fa-shopping-cart text-lg"></i>
+                        <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-brand-orange text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-brand-darkBg">0</span>
+                    </button>
+                    
+                    <!-- Call to Action WhatsApp Direct -->
+                    <a href="https://wa.me/51999999999" target="_blank" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-brand-orange to-red-600 hover:scale-105 active:scale-95 text-white px-5 py-2 rounded-xl font-bold font-tech text-base uppercase tracking-wider transition-all duration-200 shadow-lg shadow-brand-orange/20">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        WhatsApp
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl bg-brand-darkCard hover:bg-brand-accentGray border border-brand-accentGray text-white transition-all duration-200">
+                        <i class="fa-solid fa-bars-staggered text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-brand-darkBg/95 border-b border-brand-accentGray backdrop-blur-xl transition-all duration-300">
+            <nav class="flex flex-col gap-4 p-6 font-tech text-xl uppercase tracking-wider">
+                <a href="#inicio" onclick="toggleMobileMenu()" class="text-white hover:text-brand-orange transition-colors py-2 border-b border-brand-accentGray/40">Inicio</a>
+                <a href="#productos" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-orange transition-colors py-2 border-b border-brand-accentGray/40">Catálogo</a>
+                <a href="#camisetas" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-orange transition-colors py-2 border-b border-brand-accentGray/40">Camisetas</a>
+                <a href="#nosotros" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-orange transition-colors py-2 border-b border-brand-accentGray/40">Nosotros</a>
+                <a href="#contacto" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand-orange transition-colors py-2">Ubicación</a>
+                <a href="https://wa.me/51999999999" target="_blank" class="flex items-center justify-center gap-2 bg-brand-orange text-white py-3 rounded-xl font-bold font-tech mt-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Escríbenos Directo
+                </a>
+            </nav>
+        </div>
+    </header>
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(9, 9, 11, 0.75), rgba(9, 9, 11, 0.95)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80');">
+        
+
+        <!-- Overlay de brillo radial naranja -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,69,0,0.15),transparent_70%)] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-7 flex flex-col items-start text-left space-y-6">
+                
+                <div class="inline-flex items-center gap-2 bg-brand-orange/15 border border-brand-orange/45 rounded-full px-4 py-1.5 text-brand-orange font-tech font-semibold tracking-wider uppercase text-xs sm:text-sm animate-pulse">
+                    <span class="w-2.5 h-2.5 rounded-full bg-brand-orange"></span>
+                    La tienda más dura del Gaming en Perú
+                </div>
+
+                <h1 class="font-orbitron text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight uppercase">
+                    VIVE EL <br class="hidden sm:inline">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-red-500 text-glow">NIVEL MÁXIMO</span>
+                </h1>
+
+                <p class="text-gray-300 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+                    Somos los líderes en consolas, videojuegos de estreno, la mercancía pop más exclusiva (Funko, figuras) y camisetas con estampados premium con diseños épicos que no encontrarás en ningún otro lado.
+                </p>
+
+                <!-- Core Features Fast Badges -->
+                <div class="grid grid-cols-3 gap-3 w-full max-w-lg pt-4">
+                    <div class="bg-brand-darkCard/80 border border-brand-accentGray rounded-xl p-3 text-center">
+                        <i class="fa-solid fa-gamepad text-brand-orange text-xl mb-1"></i>
+                        <h4 class="text-xs font-bold font-tech uppercase text-white">Videojuegos</h4>
+                    </div>
+                    <div class="bg-brand-darkCard/80 border border-brand-accentGray rounded-xl p-3 text-center">
+                        <i class="fa-solid fa-mask text-brand-orange text-xl mb-1"></i>
+                        <h4 class="text-xs font-bold font-tech uppercase text-white">Pop Merch</h4>
+                    </div>
+                    <div class="bg-brand-darkCard/80 border border-brand-accentGray rounded-xl p-3 text-center">
+                        <i class="fa-solid fa-shirt text-brand-orange text-xl mb-1"></i>
+                        <h4 class="text-xs font-bold font-tech uppercase text-white">Camisetas</h4>
+                    </div>
+                </div>
+
+                <!-- CTA Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-4">
+                    <a href="#productos" class="w-full sm:w-auto text-center bg-brand-orange hover:bg-brand-orangeHover text-white font-tech font-bold text-lg uppercase tracking-wider py-4 px-8 rounded-xl box-glow-strong transition-all duration-300 hover:scale-[1.03]">
+                        Explorar Catálogo
+                    </a>
+                    <a href="#camisetas" class="w-full sm:w-auto text-center border-2 border-brand-accentGray hover:border-brand-orange bg-brand-darkCard/50 text-white font-tech font-bold text-lg uppercase tracking-wider py-4 px-8 rounded-xl transition-all duration-300 hover:scale-[1.03]">
+                        Camisetas Personalizadas
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Right Featured Visual Panel -->
+            <div class="lg:col-span-5 flex justify-center items-center relative">
+                <!-- Floating geometric designs -->
+                <div class="absolute -top-10 -left-10 w-44 h-44 bg-brand-orange/10 rounded-full blur-3xl animate-bounce duration-5000"></div>
+                <div class="absolute -bottom-10 -right-10 w-44 h-44 bg-red-600/10 rounded-full blur-3xl animate-bounce duration-3000"></div>
+
+                <!-- Main Featured Card Frame -->
+                <div class="relative bg-brand-darkCard/90 border border-brand-orange/30 p-4 sm:p-6 rounded-3xl box-glow max-w-md w-full overflow-hidden">
+                    
+                    <div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-5">
+                        <img src="LOGO_TECNOGAMERS-PERU_2.jpg" alt="[Imagen de Portada de Tecno Gamers en Perú]" class="w-full h-full object-cover rounded-2xl hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=80';">
+                    </div>
+
+                    <!-- Store Highlights Tags -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-brand-orange font-tech font-bold uppercase tracking-wider text-sm"><i class="fa-solid fa-fire mr-1"></i> Especiales de la Semana</span>
+                        <div class="flex items-center gap-1.5 text-xs text-white bg-green-500/10 border border-green-500/35 px-2.5 py-1 rounded-full">
+                            <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping"></span>
+                            Online 24/7
+                        </div>
+                    </div>
+
+                    <!-- Highlight text details -->
+                    <h3 class="font-orbitron font-bold text-xl text-white mb-2">¡Llegaron los Funko Pops de Temporada y Nuevos T-Shirts de Animes!</h3>
+                    <p class="text-sm text-gray-400">Enviamos a todo el Perú de forma 100% segura. Delivery express en Lima Metropolitana.</p>
+
+                    <div class="mt-4 pt-4 border-t border-brand-accentGray flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <img src="logo-tecnogamers_FB.jpg" alt="[Imagen de Logo Facebook Tecno Gamers]" class="w-8 h-8 rounded-full border border-brand-accentGray" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=50&q=80';">
+                            <span class="text-xs font-semibold text-gray-300">@TecnogamersPeru</span>
+                        </div>
+                        <span class="text-xs text-gray-500">TecnoGamers Shop</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section id="productos" class="py-24 bg-brand-darkBg border-t border-brand-accentGray/40 relative">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            
+            <!-- Título de sección + Tabs de filtro por categoría -->
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-brand-orange font-tech uppercase tracking-widest text-lg font-bold block mb-2">// TODO EL PODER GAMER</span>
+                    <h2 class="font-orbitron text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">Catálogo de Productos</h2>
+                </div>
+                <!-- Sistema de pestañas de filtro: Todos, Videojuegos, Merchandising, Camisetas -->
+                <div class="flex flex-wrap gap-2 font-tech text-base sm:text-lg uppercase tracking-wider">
+                    <button onclick="filterProducts('todos')" class="filter-tab active bg-brand-orange text-white border border-brand-orange px-5 py-2 rounded-xl transition-all duration-300" id="btn-tab-todos">
+                        Todos
+                    </button>
+                    <button onclick="filterProducts('videojuegos')" class="filter-tab bg-brand-darkCard text-gray-300 border border-brand-accentGray hover:border-brand-orange hover:text-white px-5 py-2 rounded-xl transition-all duration-300" id="btn-tab-videojuegos">
+                        Videojuegos
+                    </button>
+                    <button onclick="filterProducts('merchandising')" class="filter-tab bg-brand-darkCard text-gray-300 border border-brand-accentGray hover:border-brand-orange hover:text-white px-5 py-2 rounded-xl transition-all duration-300" id="btn-tab-merchandising">
+                        Merchandising
+                    </button>
+                    <button onclick="filterProducts('camisetas')" class="filter-tab bg-brand-darkCard text-gray-300 border border-brand-accentGray hover:border-brand-orange hover:text-white px-5 py-2 rounded-xl transition-all duration-300" id="btn-tab-camisetas">
+                        Camisetas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Products Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="products-grid">
+                <!-- Products will be injected automatically here by JS -->
+            </div>
+
+        </div>
+    </section>
+    <section id="camisetas" class="py-24 bg-brand-darkCard/60 border-t border-brand-accentGray/40 relative">
+        <!-- Gradiente radial decorativo de fondo -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,69,0,0.08),transparent_50%)] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-orange font-tech uppercase tracking-widest text-lg font-bold block mb-2">// HAZLO A TU MANERA</span>
+                <h2 class="font-orbitron text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight mb-4">Personalizador de Camisetas</h2>
+                <p class="text-gray-400">¿Tienes un diseño en mente o quieres lucir la versión clásica de Tecno Gamers? Selecciona el color de tu camiseta y la estampa frontal favorita para crear tu prenda ideal.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- === PANEL IZQUIERDO: Vista previa de la camiseta en tiempo real === -->
+                <div class="lg:col-span-6 flex flex-col items-center justify-center bg-brand-darkBg/90 border border-brand-accentGray rounded-3xl p-6 sm:p-12 relative overflow-hidden min-h-[450px]">
+                    <!-- Etiqueta "Previsualización en tiempo real" -->
+                    <div class="absolute top-4 left-4 bg-brand-orange/15 border border-brand-orange/30 text-brand-orange font-tech text-xs uppercase px-3 py-1 rounded-md tracking-wider">
+                        Previsualización en tiempo real
+                    </div>
+
+                    <!-- Contenedor de la camiseta SVG + estampa superpuesta -->
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 transition-all duration-500" id="shirt-model-container">
+                        <!-- SVG de la silueta de camiseta (color cambia según selección) -->
+                        <svg id="svg-tshirt" class="w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]" viewBox="0 0 24 24" fill="currentColor" style="color: #0d0d0d; transition: color 0.4s ease;">
+                            <path d="M12,2A3,3 0 0,0 9,5H5A2,2 0 0,0 3,7V12A2,2 0 0,0 5,14H6V20A2,2 0 0,0 8,22H16A2,2 0 0,0 18,20V14H19A2,2 0 0,0 21,12V7A2,2 0 0,0 19,5H15A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5H11A1,1 0 0,1 12,4M5,7H8V12H5V7M19,7V12H16V7H19Z"/>
+                        </svg>
+
+                        <!-- Centered Estampa/Print graphic element inside the shirt container -->
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none mt-6">
+                            <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center p-2 rounded-lg bg-black/10">
+                                <img id="tshirt-print" src="logo-tecnogamers.jpg" alt="[Imagen de Estampa de Camiseta]" class="w-full h-full object-contain transition-all duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=150&q=80';">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjetas de especificaciones: material y calidad de impresión -->
+                    <div class="flex gap-4 mt-8 w-full border-t border-brand-accentGray/50 pt-6">
+                        <div class="flex-1 flex items-center gap-3">
+                            <i class="fa-solid fa-certificate text-brand-orange text-xl"></i>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase font-orbitron">100% Algodón</h4>
+                                <p class="text-[11px] text-gray-400">Tacto suave de 24 al hilo premium.</p>
+                            </div>
+                        </div>
+                        <div class="flex-1 flex items-center gap-3">
+                            <i class="fa-solid fa-print text-brand-orange text-xl"></i>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase font-orbitron">Estampado DTF</h4>
+                                <p class="text-[11px] text-gray-400">Larga duración, no se cuartea.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- === PANEL DERECHO: Controles de personalización === -->
+                <div class="lg:col-span-6 space-y-8">
+                    
+                    <div>
+                        <h3 class="font-orbitron text-2xl font-bold text-white uppercase mb-2">Personaliza las Camisetas</h3>
+                        <p class="text-gray-400">Selecciona las especificaciones para armar tu pedido a medida.</p>
+                    </div>
+
+                    <!-- PASO 1: Seleccionar color de camiseta (Negro, Naranja, Blanco) -->
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider font-orbitron text-brand-orange block mb-3">Paso 1: Color de la Camiseta</span>
+                        <div class="flex gap-4">
+                            <!-- Black Color Selector -->
+                            <button onclick="changeShirtColor('#0D0D0D', 'Negro')" class="color-btn active group flex items-center gap-2.5 bg-brand-darkBg border-2 border-brand-orange px-4 py-3 rounded-2xl transition-all duration-200">
+                                <span class="w-6 h-6 rounded-full bg-[#0D0D0D] border border-white/20 block"></span>
+                                <span class="text-sm font-tech font-bold uppercase text-white tracking-wide">Negro Carbón</span>
+                            </button>
+                            <!-- Orange Color Selector -->
+                            <button onclick="changeShirtColor('#FF4500', 'Naranja')" class="color-btn group flex items-center gap-2.5 bg-brand-darkBg border-2 border-brand-accentGray hover:border-brand-orange/60 px-4 py-3 rounded-2xl transition-all duration-200">
+                                <span class="w-6 h-6 rounded-full bg-brand-orange block"></span>
+                                <span class="text-sm font-tech font-bold uppercase text-white tracking-wide">Naranja Gamers</span>
+                            </button>
+                            <!-- White Color Selector -->
+                            <button onclick="changeShirtColor('#F3F4F6', 'Blanco')" class="color-btn group flex items-center gap-2.5 bg-brand-darkBg border-2 border-brand-accentGray hover:border-brand-orange/60 px-4 py-3 rounded-2xl transition-all duration-200">
+                                <span class="w-6 h-6 rounded-full bg-white block"></span>
+                                <span class="text-sm font-tech font-bold uppercase text-white tracking-wide">Blanco Minimal</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PASO 2: Seleccionar diseño de estampa (logo, ninja, retro) -->
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider font-orbitron text-brand-orange block mb-3">Paso 2: Diseño de Estampa</span>
+                        <div class="grid grid-cols-3 gap-4">
+                            <!-- Option 1: Classic Icon -->
+                            <button onclick="changeShirtPrint('logo-tecnogamers.jpg', 'Logo Oficial')" class="print-btn active bg-brand-darkBg border-2 border-brand-orange p-3 rounded-2xl text-center transition-all duration-200">
+                                <img src="logo-tecnogamers.jpg" alt="[Imagen de Logotipo Clásico]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=80&q=80';">
+                                <span class="text-xs font-tech font-bold uppercase text-white tracking-wider block">Classic Logo</span>
+                            </button>
+                            <!-- Option 2: Peru Premium Horizontal -->
+                            <button onclick="changeShirtPrint('LOGO TECNOGAMERS-PERU_2.jpg', 'Gamer Ninja')" class="print-btn bg-brand-darkBg border-2 border-brand-accentGray hover:border-brand-orange/60 p-3 rounded-2xl text-center transition-all duration-200">
+                                <img src="LOGO TECNOGAMERS-PERU_2.jpg" alt="[Imagen de Escudo Ninja]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=80&q=80';">
+                                <span class="text-xs font-tech font-bold uppercase text-white tracking-wider block">Ninja Shield</span>
+                            </button>
+                            <!-- Option 3: Facebook Banner Retro -->
+                            <button onclick="changeShirtPrint('logo-tecnogamers_FB.jpg', 'Machu Picchu Retro')" class="print-btn bg-brand-darkBg border-2 border-brand-accentGray hover:border-brand-orange/60 p-3 rounded-2xl text-center transition-all duration-200">
+                                <img src="logo-tecnogamers_FB.jpg" alt="[Imagen de Banner Retro]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=80&q=80';">
+                                <span class="text-xs font-tech font-bold uppercase text-white tracking-wider block">Retro Orange</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PASO 3: Seleccionar talla (S, M, L, XL) -->
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider font-orbitron text-brand-orange block mb-3">Paso 3: Tallas Disponibles</span>
+                        <div class="flex gap-3">
+                            <button onclick="selectTshirtSize('S')" class="size-btn bg-brand-darkBg border-2 border-brand-orange text-white w-12 h-12 flex items-center justify-center font-tech font-bold text-lg rounded-xl transition-all duration-200" id="size-S">S</button>
+                            <button onclick="selectTshirtSize('M')" class="size-btn bg-brand-darkBg border-2 border-brand-accentGray text-gray-400 hover:border-brand-orange hover:text-white w-12 h-12 flex items-center justify-center font-tech font-bold text-lg rounded-xl transition-all duration-200" id="size-M">M</button>
+                            <button onclick="selectTshirtSize('L')" class="size-btn bg-brand-darkBg border-2 border-brand-accentGray text-gray-400 hover:border-brand-orange hover:text-white w-12 h-12 flex items-center justify-center font-tech font-bold text-lg rounded-xl transition-all duration-200" id="size-L">L</button>
+                            <button onclick="selectTshirtSize('XL')" class="size-btn bg-brand-darkBg border-2 border-brand-accentGray text-gray-400 hover:border-brand-orange hover:text-white w-12 h-12 flex items-center justify-center font-tech font-bold text-lg rounded-xl transition-all duration-200" id="size-XL">XL</button>
+                        </div>
+                    </div>
+
+                    <!-- Precio y botón "Añadir a Carrito" de la camiseta personalizada -->
+                    <div class="p-6 bg-brand-darkBg border border-brand-accentGray rounded-2xl flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 uppercase">Precio Especial de Lanzamiento</span>
+                            <h3 class="font-orbitron font-extrabold text-3xl text-white">S/. 55.00</h3>
+                        </div>
+                        <button onclick="addCustomShirtToCart()" class="bg-brand-orange hover:bg-brand-orangeHover text-white font-tech font-bold uppercase tracking-widest px-6 py-3.5 rounded-xl transition-all duration-200 flex items-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i> Añadir a Carrito
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <section id="nosotros" class="py-24 bg-brand-darkBg border-t border-brand-accentGray/40 relative">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Panel izquierdo: Imagen de marca + tarjetas de valores (envíos, garantía) -->
+                <div class="lg:col-span-5 space-y-6 relative">
+                    <!-- Banner principal de marca con overlay gradiente -->
+                    <div class="relative rounded-3xl overflow-hidden border border-brand-orange/40 box-glow">
+                        <img src="LOGO TECNOGAMERS-PERU_1HZ.jpg" alt="[Imagen de Machu Picchu con estética gamer]" class="w-full h-80 object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?auto=format&fit=crop&w=600&q=80';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-darkBg via-brand-darkBg/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-orange p-1 flex items-center justify-center">
+                                <img src="logo tecnogamers.jpg" alt="[Imagen de Isotipo Tecno Gamers]" class="w-full h-full object-contain rounded-xl" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=100&q=80';">
+                            </div>
+                            <div>
+                                <h4 class="font-orbitron font-bold text-white text-base">TECNO GAMERS PERÚ</h4>
+                                <p class="text-xs text-brand-orange">Technology Games Shop</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side by side images of brand values -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-brand-darkCard p-4 rounded-2xl border border-brand-accentGray">
+                            <i class="fa-solid fa-truck-fast text-brand-orange text-2xl mb-2"></i>
+                            <h4 class="font-orbitron font-bold text-white text-sm uppercase mb-1">Envíos Rápidos</h4>
+                            <p class="text-xs text-gray-400">Enviamos a todo el Perú mediante Olva Courier y Shalom de inmediato.</p>
+                        </div>
+                        <div class="bg-brand-darkCard p-4 rounded-2xl border border-brand-accentGray">
+                            <i class="fa-solid fa-shield-halved text-brand-orange text-2xl mb-2"></i>
+                            <h4 class="font-orbitron font-bold text-white text-sm uppercase mb-1">Garantía Total</h4>
+                            <p class="text-xs text-gray-400">Productos sellados, con garantía directa de fábrica.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel derecho: Narrativa de marca, misión y estadísticas -->
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-brand-orange font-tech uppercase tracking-widest text-lg font-bold block">// NUESTRA IDENTIDAD</span>
+                    <h2 class="font-orbitron text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">Pasión por los Videojuegos y la Cultura Pop</h2>
+                    
+                    <p class="text-gray-300 leading-relaxed font-light">
+                        En <strong class="text-white">Tecno Gamers</strong>, no somos simplemente una tienda; somos una comunidad apasionada de gamers y amantes del coleccionismo. Fundados con el propósito de conectar a los jugadores del Perú con las últimas novedades globales, nos esforzamos en brindar el mejor catálogo de consolas (PlayStation, Nintendo Switch, Xbox), merchandising exclusivo y t-shirts premium de tus animes, películas y videojuegos preferidos.
+                    </p>
+
+                    <blockquote class="border-l-4 border-brand-orange pl-4 py-2 bg-brand-darkCard/50 rounded-r-xl">
+                        <p class="text-sm italic text-gray-400">"Nuestra misión es llevar la experiencia gaming al siguiente nivel, brindando productos originales, precios competitivos y una atención personalizada insuperable en cada rincón del Perú."</p>
+                    </blockquote>
+
+                    <!-- Contadores de métricas: Clientes Felices, Funko Pops, Garantía -->
+                    <div class="grid grid-cols-3 gap-4 pt-4">
+                        <div class="text-center p-4 bg-brand-darkCard/60 border border-brand-accentGray rounded-2xl">
+                            <span class="font-orbitron font-black text-2xl sm:text-3xl text-brand-orange text-glow block">10K+</span>
+                            <span class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest font-semibold block mt-1">Clientes Felices</span>
+                        </div>
+                        <div class="text-center p-4 bg-brand-darkCard/60 border border-brand-accentGray rounded-2xl">
+                            <span class="font-orbitron font-black text-2xl sm:text-3xl text-brand-orange text-glow block">500+</span>
+                            <span class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest font-semibold block mt-1">Funko Pops</span>
+                        </div>
+                        <div class="text-center p-4 bg-brand-darkCard/60 border border-brand-accentGray rounded-2xl">
+                            <span class="font-orbitron font-black text-2xl sm:text-3xl text-brand-orange text-glow block">100%</span>
+                            <span class="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest font-semibold block mt-1">Garantía Peruana</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <section id="contacto" class="py-24 bg-brand-darkCard/60 border-t border-brand-accentGray/40 relative">
+        <!-- Gradiente radial decorativo -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,69,0,0.06),transparent_40%)] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-orange font-tech uppercase tracking-widest text-lg font-bold block mb-2">// CONTACTO DIRECTO</span>
+                <h2 class="font-orbitron text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight mb-4">¿Listo para subir de nivel?</h2>
+                <p class="text-gray-400">Visítanos en nuestras tiendas físicas en Lima o haz tu pedido directamente de forma 100% online.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Panel izquierdo: Información de tiendas, teléfono, email, redes sociales -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-brand-darkBg/90 border border-brand-accentGray rounded-3xl p-6 sm:p-8 space-y-6">
+                        
+                        <h3 class="font-orbitron text-xl font-bold text-white uppercase mb-4">Detalles de Tiendas</h3>
+
+                        <div class="space-y-4">
+                            <!-- Store Location Item 1 -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-orange/15 border border-brand-orange/40 flex items-center justify-center text-brand-orange shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Tienda Central - Lima Cercado</h4>
+                                    <p class="text-xs text-gray-400">Centro Comercial Polvos Azules, Sótano Pasaje 15, Tienda 8.</p>
+                                    <span class="text-[11px] text-brand-orange font-semibold block mt-1"><i class="fa-regular fa-clock"></i> Lun a Sab: 10:00 AM - 8:00 PM</span>
+                                </div>
+                            </div>
+
+                            <!-- Store Location Item 2 -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-orange/15 border border-brand-orange/40 flex items-center justify-center text-brand-orange shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Módulo Plaza Norte</h4>
+                                    <p class="text-xs text-gray-400">Av. Alfredo Mendiola 1400, Independencia (Frente a Falabella).</p>
+                                    <span class="text-[11px] text-brand-orange font-semibold block mt-1"><i class="fa-regular fa-clock"></i> Dom a Dom: 11:00 AM - 9:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- General contacts links -->
+                        <div class="pt-6 border-t border-brand-accentGray/60 space-y-3">
+                            <a href="tel:+51999999999" class="flex items-center gap-3 text-sm text-gray-300 hover:text-brand-orange transition-colors">
+                                <i class="fa-solid fa-phone text-brand-orange"></i>
+                                +51 999 999 999
+                            </a>
+                            <a href="mailto:soporte@tecnogamers.com" class="flex items-center gap-3 text-sm text-gray-300 hover:text-brand-orange transition-colors">
+                                <i class="fa-solid fa-envelope text-brand-orange"></i>
+                                soporte@tecnogamers.com
+                            </a>
+                            <div class="flex items-center gap-4 pt-3">
+                                <a href="#" class="w-8 h-8 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                                <a href="#" class="w-8 h-8 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#" class="w-8 h-8 rounded-lg bg-brand-darkCard border border-brand-accentGray hover:border-brand-orange hover:text-brand-orange text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Panel derecho: Formulario de contacto -->
+                <div class="lg:col-span-7 bg-brand-darkBg/90 border border-brand-accentGray rounded-3xl p-6 sm:p-8">
+                    
+                    <h3 class="font-orbitron text-xl font-bold text-white uppercase mb-6"><i class="fa-regular fa-paper-plane text-brand-orange mr-2"></i> Envíanos una Consulta</h3>
+                    
+                    <!-- Contact Form -->
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs font-bold text-gray-400 uppercase font-orbitron block mb-2">Nombre Completo</label>
+                                <input type="text" required placeholder="Ej. Juan Pérez" class="w-full bg-brand-darkCard border border-brand-accentGray focus:border-brand-orange focus:ring-1 focus:ring-brand-orange rounded-xl py-3 px-4 text-white outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-gray-400 uppercase font-orbitron block mb-2">Teléfono / WhatsApp</label>
+                                <input type="tel" required placeholder="Ej. 999 999 999" class="w-full bg-brand-darkCard border border-brand-accentGray focus:border-brand-orange focus:ring-1 focus:ring-brand-orange rounded-xl py-3 px-4 text-white outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-xs font-bold text-gray-400 uppercase font-orbitron block mb-2">Correo Electrónico</label>
+                            <input type="email" required placeholder="Ej. juan@tecnogamers.com" class="w-full bg-brand-darkCard border border-brand-accentGray focus:border-brand-orange focus:ring-1 focus:ring-brand-orange rounded-xl py-3 px-4 text-white outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label class="text-xs font-bold text-gray-400 uppercase font-orbitron block mb-2">¿En qué estás interesado?</label>
+                            <select class="w-full bg-brand-darkCard border border-brand-accentGray focus:border-brand-orange focus:ring-1 focus:ring-brand-orange rounded-xl py-3 px-4 text-white outline-none transition-all">
+                                <option>Consolas de Videojuegos</option>
+                                <option>Últimos Títulos y Videojuegos</option>
+                                <option>Merchandising (Funko, Figuras)</option>
+                                <option>Camisetas Especiales</option>
+                                <option>Consultas Generales / Alianzas</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="text-xs font-bold text-gray-400 uppercase font-orbitron block mb-2">Tu Mensaje</label>
+                            <textarea rows="4" required placeholder="Detalla los artículos que te interesan y nuestro equipo técnico te responderá con cotización al instante..." class="w-full bg-brand-darkCard border border-brand-accentGray focus:border-brand-orange focus:ring-1 focus:ring-brand-orange rounded-xl py-3 px-4 text-white outline-none transition-all resize-none"></textarea>
+                        </div>
+
+                        <!-- Submit with modern animation -->
+                        <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white font-tech font-bold text-lg uppercase tracking-widest py-3.5 px-6 rounded-xl transition-all duration-300 transform active:scale-95">
+                            Enviar Consulta por Correo
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <footer class="bg-brand-darkBg border-t border-brand-accentGray/60 py-12">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <div class="flex items-center gap-3">
+                <!--img src="logo tecnogamers-01.jpg" alt="[Imagen de Logotipo de Pie de Página]" class="w-10 h-10 object-contain rounded-lg border border-brand-orange/30" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=100&q=80';"-->
+                <!--div>
+                    <span class="font-orbitron font-extrabold text-white text-base">TECNO <span class="text-brand-orange">GAMERS</span></span>
+                    <p class="text-[10px] text-gray-500 font-tech uppercase -mt-1">Technology Games Shop | © 2026</p>
+                </div-->
+
+                <div class="logo-tecno">
+                        <img src="images/logo_tecnogamers_1_f_oscuro.png" alt="logo tecnogamers" style="height: 90px;" >
+                </div>
+            </div>
+
+            <!-- Enlaces rápidos del footer (misma navegación que el header) -->
+            <div class="flex flex-wrap gap-6 font-tech text-sm uppercase tracking-wider text-gray-400">
+                <a href="#inicio" class="hover:text-brand-orange transition-colors">Inicio</a>
+                <a href="#productos" class="hover:text-brand-orange transition-colors">Productos</a>
+                <a href="#camisetas" class="hover:text-brand-orange transition-colors">Camisetas</a>
+                <a href="#nosotros" class="hover:text-brand-orange transition-colors">Nosotros</a>
+                <a href="#contacto" class="hover:text-brand-orange transition-colors">Contacto</a>
+            </div>
+
+            <div class="text-xs text-gray-500">
+                Todos los derechos reservados. Diseñado por y para Gamers en Perú.
+            </div>
+
+        </div>
+    </footer>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-brand-darkBg border-l border-brand-accentGray z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        
+        <!-- Encabezado del carrito: título + botón cerrar -->
+        <div class="p-6 border-b border-brand-accentGray flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-cart-shopping text-brand-orange text-xl"></i>
+                <h3 class="font-orbitron font-bold text-white text-lg uppercase">Tu Pedido</h3>
+            </div>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-2xl transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Lista de items del carrito (scrolleable) - se inyecta dinámicamente con JS -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-4" id="cart-items-container">
+            <!-- Dynamic items loaded here -->
+            <div class="text-center py-12 text-gray-500" id="cart-empty-state">
+                <i class="fa-solid fa-cart-arrow-down text-4xl mb-3 block"></i>
+                El carrito está vacío. <br>¡Añade productos de arriba para empezar!
+            </div>
+        </div>
+
+        <!-- Pie del carrito: total, botón WhatsApp checkout, vaciar carrito -->
+        <div class="p-6 border-t border-brand-accentGray bg-brand-darkCard space-y-4">
+            
+            <div class="flex items-center justify-between font-orbitron font-bold text-white text-lg">
+                <span>Total Estimado:</span>
+                <span id="cart-total-text" class="text-brand-orange text-glow">S/. 0.00</span>
+            </div>
+
+            <p class="text-xs text-gray-400">Los pedidos se procesan y despachan mediante WhatsApp. Se cotizará costo de envío según tu ubicación.</p>
+
+            <button onclick="checkoutViaWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-tech font-bold text-lg uppercase tracking-wider py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all duration-200 shadow-lg shadow-green-600/10 hover:scale-[1.02]">
+                <i class="fa-brands fa-whatsapp text-2xl"></i> Enviar Pedido a WhatsApp
+            </button>
+
+            <button onclick="clearCart()" class="w-full text-center text-xs text-gray-500 hover:text-red-500 transition-colors uppercase font-tech">
+                Vaciar Carrito de Compras
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Overlay oscuro semitransparente detrás del carrito (click para cerrar) -->
+    <div id="cart-overlay" onclick="toggleCart()" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"></div>
+    <div id="toast-container" class="fixed bottom-20 right-6 z-50 space-y-3 pointer-events-none"></div>
+    <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-brand-orange hover:bg-brand-orangeHover text-white rounded-full flex items-center justify-center shadow-lg shadow-brand-orange/30 transition-all duration-300 border-2 border-brand-darkBg" title="Volver arriba">
+        <i class="fa-solid fa-arrow-up text-lg"></i>
+    </button>
+    <script>
+        // === SCROLL SUAVE PERSONALIZADO ===
+        // Función principal: desplazamiento animado con easing cúbico (~1200ms)
+        function smoothScrollTo(target) {
+            const targetEl = document.querySelector(target);
+            if (!targetEl) return;
+
+            const navbarHeight = document.getElementById('navbar').offsetHeight;
+            const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            const duration = 1200;
+            let startTime = null;
+
+            function easeInOutCubic(t) {
+                return t < 0.5
+                    ? 4 * t * t * t
+                    : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+
+            function animation(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                window.scrollTo(0, startPosition + distance * eased);
+                if (progress < 1) {
+                    requestAnimationFrame(animation);
+                }
+            }
+
+            requestAnimationFrame(animation);
+        }
+
+        // === INTERCEPTOR DE ENLACES ANCLA ===
+        // Convierte todos los href="#seccion" en scrolls suaves animados
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('href');
+                    if (target && target !== '#') {
+                        smoothScrollTo(target);
+                    }
+                });
+            });
+        });
+
+        // === BOTÓN "VOLVER ARRIBA" - Mostrar/ocultar según posición de scroll ===
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 400) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+
+        // Función auxiliar: volver al inicio usando smoothScrollTo
+        function scrollToTop() {
+            smoothScrollTo('#inicio');
+        }
+
+        // === BASE DE DATOS DE PRODUCTOS ===
+        // Catálogo completo: videojuegos, merchandising y camisetas con precios en Soles
+        const PRODUCTS_DATABASE = [
+            {
+                id: 1,
+                name: "PlayStation 5 Slim Edition Console",
+                category: "videojuegos",
+                price: 2499.00,
+                desc: "Consola PS5 de formato Slim con almacenamiento de 1TB SSD ultra rápido y lector de discos físico.",
+                badge: "Consolas",
+                image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 2,
+                name: "Marvel's Spider-Man 2 - PS5",
+                category: "videojuegos",
+                price: 269.00,
+                desc: "Los Spideys Peter Parker y Miles Morales regresan para una espectacular aventura épica en Nueva York.",
+                badge: "Videojuegos",
+                image: "https://images.unsplash.com/photo-1608889175123-8ec330b86f84?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 3,
+                name: "Zelda Tears of the Kingdom - Nintendo Switch",
+                category: "videojuegos",
+                price: 249.00,
+                desc: "Explora las profundidades, las tierras y los cielos de Hyrule en esta magnífica y galardonada obra maestra.",
+                badge: "Videojuegos",
+                image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 4,
+                name: "Funko Pop Goku Ultra Instinto",
+                category: "merchandising",
+                price: 65.00,
+                desc: "Figura coleccionable oficial de Dragon Ball Super con excelentes detalles y acabados metálicos.",
+                badge: "Funko Pop",
+                image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 5,
+                name: "Funko Pop Darth Vader (Glow in the Dark)",
+                category: "merchandising",
+                price: 75.00,
+                desc: "Edición especial limitada con sable de luz reactivo que brilla en la oscuridad. ¡Exclusivo!",
+                badge: "Funko Pop",
+                image: "https://images.unsplash.com/photo-1559535332-db99e537e144?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 6,
+                name: "Camiseta Oficial Tecno Gamers Classic",
+                category: "camisetas",
+                price: 55.00,
+                desc: "Polo de algodón premium suave con diseño y logotipo corporativo de Tecno Gamers.",
+                badge: "Camisetas",
+                image: "camiseta-man.jpg"
+            },
+            {
+                id: 7,
+                name: "Camiseta Anime 'Goku Kaio-Ken'",
+                category: "camisetas",
+                price: 55.00,
+                desc: "Camiseta premium de alta durabilidad con espectacular diseño artístico en la espalda.",
+                badge: "Camisetas",
+                image: "13217126_109996649418264_1435484065589441872_o.jpg"
+            },
+            {
+                id: 8,
+                name: "Mochila Gaming Impermeable Pro",
+                category: "merchandising",
+                price: 189.00,
+                desc: "Cremalleras selladas contra la lluvia, puerto USB de carga externa integrado y compartimento acolchado para PS5 o laptop.",
+                badge: "Accesorios",
+                image: "LOGO TECNOGAMERS-PERU.jpg"
+            }
+        ];
+
+        // === ESTADO GLOBAL DE LA APLICACIÓN ===
+        // Variables de estado del carrito y personalizador de camisetas
+        let cart = [];
+        let selectedTshirtColor = '#0D0D0D';
+        let selectedTshirtColorName = 'Negro';
+        let selectedTshirtPrint = 'logo-tecnogamers.jpg';
+        let selectedTshirtPrintName = 'Logo Oficial';
+        let selectedTshirtSize = 'S';
+
+        // === INICIALIZACIÓN AL CARGAR LA PÁGINA ===
+        // Renderiza productos y activa efecto del navbar
+        window.onload = function() {
+            renderProducts('todos');
+            initNavbarScrollEffect();
+        };
+
+        // === EFECTO VISUAL DEL NAVBAR AL HACER SCROLL ===
+        // Agrega sombra y fondo más opaco cuando se scrollea más de 50px
+        function initNavbarScrollEffect() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-lg', 'bg-brand-darkBg/95');
+                } else {
+                    navbar.classList.remove('shadow-lg', 'bg-brand-darkBg/95');
+                }
+            });
+        }
+
+        // === RENDERIZADO DINÁMICO DE PRODUCTOS ===
+        // Genera tarjetas HTML desde PRODUCTS_DATABASE y las inserta en el grid
+        function renderProducts(categoryFilter = 'todos') {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            const filtered = categoryFilter === 'todos' 
+                ? PRODUCTS_DATABASE 
+                : PRODUCTS_DATABASE.filter(p => p.category === categoryFilter);
+
+            filtered.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = "bg-brand-darkCard border border-brand-accentGray/80 rounded-2xl overflow-hidden hover:border-brand-orange/50 transition-all duration-300 flex flex-col group";
+                
+                // Encase product names properly using URL safe parameters for placeholder image generation
+                const encodedName = encodeURIComponent(product.name).replace(/'/g, '%27');
+
+                productCard.innerHTML = `
+                    <div class="relative aspect-square overflow-hidden bg-brand-darkBg flex items-center justify-center p-4">
+                        <span class="absolute top-3 left-3 bg-brand-orange/20 border border-brand-orange/45 text-brand-orange font-tech text-xs uppercase px-2.5 py-1 rounded-md tracking-wider z-10">
+                            ${product.badge}
+                        </span>
+                        
+                        <img src="${product.image}" alt="[Imagen de ${product.name}]" class="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=300&q=80';">
+                    </div>
+
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-orbitron font-bold text-white text-base tracking-wide line-clamp-1 group-hover:text-brand-orange transition-colors">${product.name}</h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">${product.desc}</p>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-brand-accentGray/60 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-gray-500 uppercase block">Precio Especial</span>
+                                <span class="font-orbitron font-bold text-xl text-white">S/. ${product.price.toFixed(2)}</span>
+                            </div>
+                            <button onclick="addToCart(${product.id})" class="bg-brand-orange hover:bg-brand-orangeHover text-white p-3 rounded-xl transition-colors duration-200 hover:scale-105 active:scale-95" title="Añadir a Carrito">
+                                <i class="fa-solid fa-cart-plus text-base"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(productCard);
+            });
+        }
+
+        // === FILTRO POR CATEGORÍA (Tabs del catálogo) ===
+        // Actualiza estilo visual de pestañas y re-renderiza productos filtrados
+        function filterProducts(category) {
+            // Update tabs classes
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.className = "filter-tab bg-brand-darkCard text-gray-300 border border-brand-accentGray hover:border-brand-orange hover:text-white px-5 py-2 rounded-xl transition-all duration-300";
+            });
+
+            const activeTab = document.getElementById(`btn-tab-${category}`);
+            if (activeTab) {
+                activeTab.className = "filter-tab bg-brand-orange text-white border border-brand-orange px-5 py-2 rounded-xl transition-all duration-300 active";
+            }
+
+            renderProducts(category);
+        }
+
+        // === PERSONALIZADOR DE CAMISETAS ===
+        // Cambiar color de la camiseta SVG
+        function changeShirtColor(colorHex, colorName) {
+            selectedTshirtColor = colorHex;
+            selectedTshirtColorName = colorName;
+
+            // Change background of SVG
+            const svg = document.getElementById('svg-tshirt');
+            svg.style.color = colorHex;
+
+            // Update color btn styling active state
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.classList.remove('border-brand-orange');
+                btn.classList.add('border-brand-accentGray');
+            });
+            event.currentTarget.classList.add('border-brand-orange');
+            event.currentTarget.classList.remove('border-brand-accentGray');
+
+            showToast(`Color de camiseta cambiado a ${colorName}`, "info");
+        }
+
+        // Cambiar imagen de estampa superpuesta en la camiseta
+        function changeShirtPrint(imgSrc, printName) {
+            selectedTshirtPrint = imgSrc;
+            selectedTshirtPrintName = printName;
+
+            const printImg = document.getElementById('tshirt-print');
+            printImg.src = imgSrc;
+
+            // Update print btn styling active state
+            document.querySelectorAll('.print-btn').forEach(btn => {
+                btn.classList.remove('border-brand-orange');
+                btn.classList.add('border-brand-accentGray');
+            });
+            event.currentTarget.classList.add('border-brand-orange');
+            event.currentTarget.classList.remove('border-brand-accentGray');
+
+            showToast(`Estampa frontal cambiada a ${printName}`, "info");
+        }
+
+        // Seleccionar talla de camiseta
+        function selectTshirtSize(size) {
+            selectedTshirtSize = size;
+
+            // Reset sizes visual style
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.classList.remove('border-brand-orange', 'text-white');
+                btn.classList.add('border-brand-accentGray', 'text-gray-400');
+            });
+
+            const activeSizeBtn = document.getElementById(`size-${size}`);
+            if (activeSizeBtn) {
+                activeSizeBtn.classList.add('border-brand-orange', 'text-white');
+                activeSizeBtn.classList.remove('border-brand-accentGray', 'text-gray-400');
+            }
+
+            showToast(`Talla seleccionada: ${size}`, "info");
+        }
+
+        // === LÓGICA DEL CARRITO DE COMPRAS ===
+        // Abrir/cerrar panel deslizante del carrito
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-overlay');
+            drawer.classList.toggle('translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        // Actualizar interfaz del carrito: items, total y badge del contador
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const emptyState = document.getElementById('cart-empty-state');
+            const totalText = document.getElementById('cart-total-text');
+            const badgeCount = document.getElementById('cart-count');
+
+            // Update items count
+            badgeCount.innerText = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '';
+                cartItemsContainer.appendChild(emptyState);
+                totalText.innerText = "S/. 0.00";
+                return;
+            }
+
+            // If has items, remove empty state placeholder
+            cartItemsContainer.innerHTML = '';
+
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = "flex items-center gap-4 bg-brand-darkCard p-3.5 rounded-xl border border-brand-accentGray";
+                itemDiv.innerHTML = `
+                    <div class="w-16 h-16 rounded-lg overflow-hidden bg-brand-darkBg flex items-center justify-center p-1 shrink-0">
+                        <img src="${item.image}" alt="[Imagen de ${item.name}]" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=100&q=80';">
+                    </div>
+                    
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-sm font-bold text-white uppercase truncate">${item.name}</h4>
+                        <p class="text-xs text-brand-orange font-orbitron mt-0.5">S/. ${item.price.toFixed(2)}</p>
+                        ${item.isCustom ? `<p class="text-[10px] text-gray-400 uppercase mt-1">Color: ${item.customDetails.color} | Estampa: ${item.customDetails.print} | Talla: ${item.customDetails.size}</p>` : ''}
+                    </div>
+
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="flex items-center border border-brand-accentGray rounded-lg overflow-hidden">
+                            <button onclick="decrementItem(${index})" class="px-2 py-1 bg-brand-darkBg text-xs text-gray-400 hover:text-white">-</button>
+                            <span class="px-2.5 text-xs text-white">${item.quantity}</span>
+                            <button onclick="incrementItem(${index})" class="px-2 py-1 bg-brand-darkBg text-xs text-gray-400 hover:text-white">+</button>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-[10px] text-red-500 hover:underline">Eliminar</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+            });
+
+            totalText.innerText = `S/. ${total.toFixed(2)}`;
+        }
+
+        // Agregar producto del catálogo al carrito
+        function addToCart(productId) {
+            const product = PRODUCTS_DATABASE.find(p => p.id === productId);
+            if (!product) return;
+
+            // Check if already in cart
+            const existingIndex = cart.findIndex(item => item.id === productId && !item.isCustom);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1,
+                    isCustom: false
+                });
+            }
+
+            updateCartUI();
+            showToast(`"${product.name}" añadido al pedido`, "success");
+        }
+
+        // Agregar camiseta personalizada al carrito (con color, estampa y talla seleccionados)
+        function addCustomShirtToCart() {
+            const customItem = {
+                id: Date.now(), // Generate custom temporary ID
+                name: "Camiseta Gamer Personalizada",
+                price: 55.00,
+                image: selectedTshirtPrint,
+                quantity: 1,
+                isCustom: true,
+                customDetails: {
+                    color: selectedTshirtColorName,
+                    print: selectedTshirtPrintName,
+                    size: selectedTshirtSize
+                }
+            };
+
+            cart.push(customItem);
+            updateCartUI();
+            showToast("Camiseta personalizada añadida al pedido", "success");
+            toggleCart(); // Auto open cart drawer for better user flow representation
+        }
+
+        // Modificar cantidad de un item en el carrito (+1)
+        function incrementItem(index) {
+            cart[index].quantity += 1;
+            updateCartUI();
+        }
+
+        // Reducir cantidad de un item (-1). Si llega a 0, se elimina del carrito
+        function decrementItem(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        // Eliminar un item específico del carrito
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            showToast("Artículo removido del pedido", "info");
+        }
+
+        // Vaciar todos los items del carrito
+        function clearCart() {
+            cart = [];
+            updateCartUI();
+            showToast("Pedido vaciado", "info");
+        }
+
+        // === SISTEMA DE NOTIFICACIONES TOAST ===
+        // Muestra mensajes emergentes (éxito/info) que desaparecen después de 3 segundos
+        function showToast(message, type = "success") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-xl border shadow-xl flex items-center gap-3 text-sm font-semibold transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto max-w-sm ${
+                type === 'success' 
+                    ? 'bg-green-950/90 border-green-500/50 text-green-300' 
+                    : 'bg-brand-darkCard border-brand-orange/40 text-brand-orange'
+            }`;
+            
+            const icon = type === 'success' 
+                ? '<i class="fa-solid fa-circle-check text-green-400 text-lg"></i>' 
+                : '<i class="fa-solid fa-circle-info text-brand-orange text-lg"></i>';
+
+            toast.innerHTML = `
+                ${icon}
+                <span class="flex-1">${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            // Animate In
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            // Animate Out
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // === CHECKOUT VIA WHATSAPP ===
+        // Genera mensaje formateado con el pedido y abre WhatsApp con el número de la tienda
+        function checkoutViaWhatsApp() {
+            if (cart.length === 0) {
+                showToast("Por favor, añade al menos un producto antes de checkout", "info");
+                return;
+            }
+
+            let message = "¡Hola Tecno Gamers! Me gustaría realizar un pedido con el siguiente detalle:\n\n";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                message += `*${index + 1}. ${item.name}* x${item.quantity}\n`;
+                if (item.isCustom) {
+                    message += `   - Talla: ${item.customDetails.size}\n`;
+                    message += `   - Camiseta: ${item.customDetails.color}\n`;
+                    message += `   - Estampa: ${item.customDetails.print}\n`;
+                }
+                message += `   Precio unitario: S/. ${item.price.toFixed(2)} | Subtotal: S/. ${subtotal.toFixed(2)}\n\n`;
+            });
+
+            message += `*Total Estimado: S/. ${total.toFixed(2)}*\n\n`;
+            message += `Por favor envíenme los datos de pago (Yape/Plin o transferencia) y coordinemos el envío. ¡Muchas gracias!`;
+
+            // Encode string for WhatsApp standard API
+            const encodedText = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/51999999999?text=${encodedText}`;
+
+            // Open window tab
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // === FORMULARIO DE CONTACTO ===
+        // Previene envío real, resetea campos y muestra confirmación toast
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            // Reset form
+            document.getElementById('contact-form').reset();
+            showToast("¡Mensaje recibido! Nos comunicaremos contigo por WhatsApp de inmediato.", "success");
+        }
+
+        // === MENÚ MÓVIL (Hamburger drawer) ===
+        // Abre/cierra el menú desplegable en pantallas pequeñas
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            
+            if (menu.classList.contains('hidden')) {
+                icon.className = "fa-solid fa-bars-staggered text-xl";
+            } else {
+                icon.className = "fa-solid fa-xmark text-xl text-brand-orange";
+            }
+        }
+    </script>
+</body>
+</html>
