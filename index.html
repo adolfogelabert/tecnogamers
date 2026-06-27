@@ -347,7 +347,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <!-- === PANEL IZQUIERDO: Vista previa de la camiseta en tiempo real === -->
-                <div class="lg:col-span-6 flex flex-col items-center justify-center bg-brand-darkBg/90 border border-brand-accentGray rounded-3xl p-6 sm:p-12 relative overflow-hidden min-h-[350px] sm:min-h-[450px]">
+                <div class="lg:col-span-6 flex flex-col items-center justify-center bg-gray-500 border border-brand-accentGray rounded-3xl p-6 sm:p-12 relative overflow-hidden min-h-[350px] sm:min-h-[450px]">
                     <!-- Etiqueta "Previsualización en tiempo real" -->
                     <div class="absolute top-4 left-4 bg-brand-orange/15 border border-brand-orange/30 text-brand-orange font-tech text-xs uppercase px-3 py-1 rounded-md tracking-wider">
                         Previsualización en tiempo real
@@ -371,7 +371,7 @@
                         <!-- Centered Estampa/Print graphic element inside the shirt container -->
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none mt-6">
                             <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center p-2 rounded-lg bg-black/10">
-                                <img id="tshirt-print" src="logo-tecnogamers.jpg" alt="[Imagen de Estampa de Camiseta]" class="w-full h-full object-contain transition-all duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=150&q=80';">
+                                <img id="tshirt-print" src="images/logo_500x500px.png" alt="[Imagen de Estampa de Camiseta]" class="w-full h-full object-contain transition-all duration-300" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=150&q=80';">
                             </div>
                         </div>
                     </div>
@@ -431,18 +431,18 @@
                         <span class="text-xs font-bold uppercase tracking-wider font-orbitron text-brand-orange block mb-3">Paso 2: Diseño de Estampa</span>
                         <div class="grid grid-cols-3 gap-4">
                             <!-- Option 1: Classic Icon -->
-                            <button onclick="changeShirtPrint('logo-tecnogamers.jpg', 'Logo Oficial')" class="print-btn active bg-brand-darkBg border-2 border-brand-orange p-3 rounded-2xl text-center transition-all duration-200">
-                                <img src="logo-tecnogamers.jpg" alt="[Imagen de Logotipo Clásico]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=80&q=80';">
+                            <button onclick="changeShirtPrint('images/logo_500x500px.png', 'Logo Oficial')" class="print-btn active bg-brand-darkBg border-2 border-brand-orange p-3 rounded-2xl text-center transition-all duration-200">
+                                <img src="images/logo_500x500px.png" alt="[Imagen de Logotipo Clásico]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=80&q=80';">
                                 <span class="text-xs font-tech font-bold uppercase text-white tracking-wider block">Classic Logo</span>
                             </button>
                             <!-- Option 2: Peru Premium Horizontal -->
-                            <button onclick="changeShirtPrint('LOGO TECNOGAMERS-PERU_2.jpg', 'Gamer Ninja')" class="print-btn bg-brand-darkBg border-2 border-brand-accentGray hover:border-brand-orange/60 p-3 rounded-2xl text-center transition-all duration-200">
-                                <img src="LOGO TECNOGAMERS-PERU_2.jpg" alt="[Imagen de Escudo Ninja]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=80&q=80';">
+                            <button onclick="changeShirtPrint('images/logo_200x200px.png', 'Gamer Ninja')" class="print-btn bg-brand-darkBg border-2 border-brand-accentGray hover:border-brand-orange/60 p-3 rounded-2xl text-center transition-all duration-200">
+                                <img src="images/logo_200x200px.png" alt="[Imagen de Escudo Ninja]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=80&q=80';">
                                 <span class="text-xs font-tech font-bold uppercase text-white tracking-wider block">Ninja Shield</span>
                             </button>
                             <!-- Option 3: Facebook Banner Retro -->
-                            <button onclick="changeShirtPrint('logo-tecnogamers_FB.jpg', 'Machu Picchu Retro')" class="print-btn bg-brand-darkBg border-2 border-brand-accentGray hover:border-brand-orange/60 p-3 rounded-2xl text-center transition-all duration-200">
-                                <img src="logo-tecnogamers_FB.jpg" alt="[Imagen de Banner Retro]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=80&q=80';">
+                            <button onclick="changeShirtPrint('images/logo_1000x1000px.png', 'Retro Orange')" class="print-btn bg-brand-darkBg border-2 border-brand-accentGray hover:border-brand-orange/60 p-3 rounded-2xl text-center transition-all duration-200">
+                                <img src="images/logo_1000x1000px.png" alt="[Imagen de Banner Retro]" class="w-12 h-12 mx-auto object-contain mb-1" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=80&q=80';">
                                 <span class="text-xs font-tech font-bold uppercase text-white tracking-wider block">Retro Orange</span>
                             </button>
                         </div>
@@ -1056,7 +1056,7 @@
         let cart = [];
         let selectedTshirtColor = '#0D0D0D';
         let selectedTshirtColorName = 'Negro';
-        let selectedTshirtPrint = 'logo-tecnogamers.jpg';
+        let selectedTshirtPrint = 'images/logo_500x500px.png';
         let selectedTshirtPrintName = 'Logo Oficial';
         let selectedTshirtSize = 'S';
 
