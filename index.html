@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tecno Gamers - Technology Games Shop Peru</title>
+
+    <!-- =============================================
+         FAVICON - Icono que aparece en la pestaña del navegador
+         Ubicación: images/favicon.png
+    ============================================= -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     
-    <!-- Tailwind CSS CDN -->
+    <!-- =============================================
+         TAILWIND CSS - Framework de estilos
+         Configuración de colores y fuentes personalizadas
+    ============================================= -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -31,21 +39,29 @@
         }
     </script>
     
-    <!-- Google Fonts -->
+    <!-- =============================================
+         GOOGLE Fuentes: Inter (cuerpo), Orbitron (títulos), Rajdhani (botones/tech)
+    ============================================= -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome para Iconos -->
+    <!-- =============================================
+         FONTAWESOME - Librería de iconos (carrito, whatsapp, redes, etc.)
+    ============================================= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* === ESTILOS PERSONALIZADOS === */
+        /* ============================================================
+           ESTILOS PERSONALIZADOS
+           ============================================================ */
+
+        /* --- Scroll behavior: desactivado nativo, se usa JS custom --- */
         html {
-            scroll-behavior: auto; /* Desactivar scroll-behavior nativo, se usa JS custom */
+            scroll-behavior: auto;
         }
 
-        /* Efecto de brillo neon en textos naranjas */
+        /* --- Efectos de brillo (glow) para textos y tarjetas --- */
         .text-glow {
             text-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
         }
@@ -58,7 +74,7 @@
             box-shadow: 0 0 35px rgba(255, 69, 0, 0.45);
         }
 
-        /* === BARRA DE SCROLL PERSONALIZADA (temática gamer) === */
+        /* --- Barra de scroll personalizada (temática gamer) --- */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -73,7 +89,7 @@
             background: #E03A00;
         }
 
-        /* === BOTÓN "VOLVER ARRIBA" - animación de aparición/desaparición === */
+        /* --- Botón "Volver arriba": animación de aparición/desaparición --- */
         #back-to-top {
             opacity: 0;
             visibility: hidden;
@@ -98,12 +114,19 @@
 </head>
 <body class="bg-brand-darkBg text-gray-100 font-sans selection:bg-brand-orange selection:text-white overflow-x-hidden">
 
-    <!-- HEADER & NAVBAR -->
+    <!-- ============================================================
+         HEADER & NAVBAR (Líneas ~97-162)
+         Barra de navegación fija en la parte superior.
+         - Logo (izquierda)
+         - Navegación desktop (centro, oculta en móvil)
+         - Carrito + WhatsApp + Hamburger (derecha)
+         - Menú móvil drawer (se despliega hacia abajo)
+    ============================================================ -->
     <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="navbar">
         <div class="backdrop-blur-md bg-brand-darkBg/80 border-b border-brand-accentGray/50 px-4 py-3 lg:px-8">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 
-                <!-- Logo -->
+                <!-- LOGO - Click lleva a inicio -->
                 <a href="#inicio" class="flex items-center gap-3 group">
                     <!--div class="relative w-12 h-12 overflow-hidden rounded-xl border border-brand-orange/40 group-hover:border-brand-orange transition-all duration-300">
                         <img src="logo-tecnogamers.jpg" alt="[Imagen de Logo Tecno Gamers]" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=100&q=80';">
@@ -119,7 +142,7 @@
                     </div-->
                 </a>
 
-                <!-- Desktop Navigation -->
+                <!-- NAVEGACIÓN DESKTOP - Visible en md+ (768px+), oculta en móvil -->
                 <nav class="hidden md:flex items-center gap-8 font-tech text-lg uppercase tracking-wider">
                     <a href="#inicio" class="text-white hover:text-brand-orange transition-colors duration-200">Inicio</a>
                     <a href="#productos" class="text-gray-300 hover:text-brand-orange transition-colors duration-200">Catálogo</a>
@@ -128,21 +151,21 @@
                     <a href="#contacto" class="text-gray-300 hover:text-brand-orange transition-colors duration-200">Ubicación</a>
                 </nav>
 
-                <!-- Right Side Actions -->
+                <!-- ACCIONES DERECHA: Carrito + WhatsApp + Hamburger -->
                 <div class="flex items-center gap-4">
-                    <!-- Cart Button Trigger -->
+                    <!-- BOTÓN CARRITO - Abre panel deslizante derecho -->
                     <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-brand-darkCard hover:bg-brand-accentGray border border-brand-accentGray text-white transition-all duration-200">
                         <i class="fa-solid fa-shopping-cart text-lg"></i>
                         <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-brand-orange text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-brand-darkBg">0</span>
                     </button>
                     
-                    <!-- Call to Action WhatsApp Direct -->
+                    <!-- BOTÓN WHATSAPP - Oculto en móvil (se repite en menú drawer) -->
                     <a href="https://wa.me/51999999999" target="_blank" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-brand-orange to-red-600 hover:scale-105 active:scale-95 text-white px-5 py-2 rounded-xl font-bold font-tech text-base uppercase tracking-wider transition-all duration-200 shadow-lg shadow-brand-orange/20">
                         <i class="fa-brands fa-whatsapp text-lg"></i>
                         WhatsApp
                     </a>
 
-                    <!-- Mobile Menu Button -->
+                    <!-- BOTÓN HAMBURGER - Solo visible en móvil (< 768px) -->
                     <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl bg-brand-darkCard hover:bg-brand-accentGray border border-brand-accentGray text-white transition-all duration-200">
                         <i class="fa-solid fa-bars-staggered text-xl" id="menu-icon"></i>
                     </button>
@@ -151,7 +174,7 @@
             </div>
         </div>
 
-        <!-- Mobile Drawer -->
+        <!-- MENÚ MÓVIL DRAWER - Se despliega debajo del header, oculto en desktop -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-brand-darkBg/95 border-b border-brand-accentGray backdrop-blur-xl transition-all duration-300">
             <nav class="flex flex-col gap-4 p-6 font-tech text-xl uppercase tracking-wider">
                 <a href="#inicio" onclick="toggleMobileMenu()" class="text-white hover:text-brand-orange transition-colors py-2 border-b border-brand-accentGray/40">Inicio</a>
@@ -165,6 +188,11 @@
             </nav>
         </div>
     </header>
+    <!-- ============================================================
+         SECCIÓN HERO (Líneas ~163-254)
+         Banner principal con imagen de fondo, slogan, badges de
+         categorías y botones CTA. También incluye tarjeta destacada.
+    ============================================================ -->
     <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(9, 9, 11, 0.75), rgba(9, 9, 11, 0.95)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80');">
         
 
@@ -257,6 +285,12 @@
 
         </div>
     </section>
+    <!-- ============================================================
+         SECCIÓN CATÁLOGO DE PRODUCTOS (Líneas ~255-287)
+         Grid dinámico de productos filtrables por categoría.
+         Los productos se renderizan vía JS desde PRODUCTS_DATABASE.
+         Filtros: Todos, Videojuegos, Merchandising, Camisetas
+    ============================================================ -->
     <section id="productos" class="py-24 bg-brand-darkBg border-t border-brand-accentGray/40 relative">
         <div class="max-w-7xl mx-auto px-4 lg:px-8">
             
@@ -290,6 +324,14 @@
 
         </div>
     </section>
+    <!-- ============================================================
+         SECCIÓN CAMISETAS PERSONALIZADAS (Líneas ~288-423)
+         Personalizador interactivo con 3 pasos:
+           1. Color de camiseta (Negro, Naranja, Blanco)
+           2. Diseño de estampa (3 opciones de logo)
+           3. Talla (S, M, L, XL)
+         Incluye vista previa SVG en tiempo real.
+    ============================================================ -->
     <section id="camisetas" class="py-24 bg-brand-darkCard/60 border-t border-brand-accentGray/40 relative">
         <!-- Gradiente radial decorativo de fondo -->
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,69,0,0.08),transparent_50%)] pointer-events-none"></div>
@@ -314,8 +356,16 @@
                     <!-- Contenedor de la camiseta SVG + estampa superpuesta -->
                     <div class="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 transition-all duration-500" id="shirt-model-container">
                         <!-- SVG de la silueta de camiseta (color cambia según selección) -->
-                        <svg id="svg-tshirt" class="w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]" viewBox="0 0 24 24" fill="currentColor" style="color: #0d0d0d; transition: color 0.4s ease;">
-                            <path d="M12,2A3,3 0 0,0 9,5H5A2,2 0 0,0 3,7V12A2,2 0 0,0 5,14H6V20A2,2 0 0,0 8,22H16A2,2 0 0,0 18,20V14H19A2,2 0 0,0 21,12V7A2,2 0 0,0 19,5H15A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5H11A1,1 0 0,1 12,4M5,7H8V12H5V7M19,7V12H16V7H19Z"/>
+                        <svg id="svg-tshirt" class="w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)]" viewBox="0 0 871.5 885.3" fill="currentColor" style="color: #0d0d0d; transition: color 0.4s ease;">
+                            <g>
+                                <path d="M430.4,95c59.3-2.2,101.7-29.3,129.1-80.3c1.9-3.6,1.8-5.5-2.4-6.9c-4.4-1.5-9.2-5.9-12.6-4.9c-3.4,1-5.3,7.1-7.9,10.9c-15.5,22.7-34.7,41.3-60,52.8C435,85.5,396.7,78.5,361.5,50.9c-16.2-12.7-28.6-28.7-39.3-46.2c-2-3.2-3.4-3.7-6.5-1.6c-3.1,2.2-6.5,4.1-10,5.7c-3,1.4-2.9,2.8-1.5,5.4C331.2,65.6,373.7,92.4,430.4,95z"/>
+                                <path d="M342.8,22.5C383.1,33,424,36.4,465.6,32.9c18.4-1.5,36.7-3.9,54.7-8.2c2.6-0.6,4.5-1.7,6.1-3.9c4.6-6.2,9.3-12.4,13.5-20.8c-72,20.7-142.9,18.2-215.3,0.7c4.5,8,8.8,14.2,13.6,20C339.1,21.8,341.2,22.1,342.8,22.5z"/>
+                                <path d="M359.5,43.1c38.1,37,96.7,41.2,141.8,2.8C477,49.1,453.6,51.1,430,51C406.5,50.9,383.1,48.9,359.5,43.1z"/>
+                                <path d="M516.1,32.6c0.7-0.8,1.3-1.4,2.9-3.3c-59.2,12-117,12.4-174.7-1.8c1.8,2.2,2.2,3.6,5,6.4c0.2,0.2,0.6,0.8,1.1,1c9.9,4.5,20.4,6.9,31.2,8.5c37.2,5.4,74.3,4.1,111.5-0.6c2.5-0.3,5-0.6,7.4-0.9C508.4,40.8,512,37.8,516.1,32.6z"/>
+                                <path d="M695.6,856c1.8-38.2-0.5-76.3-1-114.5c-1.6-128.6-3.8-257.3-3.8-385.9c0-14.3-3.3-27.6-6.7-41.1c-15.1-61-19.4-122.6-10.6-184.9c3-21.5,7.6-42.6,14.9-63.1c1.3-3.7,1-5.3-2.9-6.9C646.7,44,608,28.3,569.3,12.6c-3.3-1.3-4.2-0.2-5.5,2.4C552,38.5,535.6,58.1,514,73.2c-49.5,34.8-119.7,33.7-168.1-2.7c-19.4-14.6-34.5-32.7-45.3-54.4c-1.2-2.3-1.8-4.3-5.4-2.6c-35.6,16.7-71.7,32.2-107.7,47.9c-4.2,1.8-4.6,3.5-3.3,7.6c12.1,36.1,16.3,73.4,16.5,111.2c0.3,52.7-6.4,104.7-18.6,155.9c-1.4,5.9-1.1,11.9-1.2,17.9c-1.6,80.8-3,161.6-4.5,242.4c-0.8,82.5-1.3,165-1.6,247.5c0,5.2,1.3,10.6,0.9,15.5c-0.4,4.3-0.3,8.7-0.9,13c-0.6,4.6,0.8,6.2,5.8,6.4c49.4,2,473.4,3.1,511.7,0.8c3.6-0.2,5-1.2,4.7-5C696.5,868.4,695.4,862,695.6,856z"/>
+                                <path d="M179,332.5c14.6-64.2,21.8-129,15.5-194.9c-2.2-22.8-6.5-45.1-13.8-66.9c-0.4-1.2-0.5-2.6-1.7-3.5c-1.5,0.2-2.2,1.5-3.1,2.4c-0.6,0.6-1.8,1.9-1.8,1.9S45.6,204,10.4,240.1l0.6,0.6l-0.7,0.7l-0.6-0.6c-4.9,5.1-7.9,8-8.1,8.2c-2.3,2-2.1,3.4,0.1,5.5c39.8,39.4,79.5,78.8,119.1,118.3c2.5,2.5,4.4,3.1,7,0.5l6.8-5.1l-6-6.1l0.7-0.7l6.1,6.2l5.4-4c11.3-8.5,22.7-16.9,34.1-25.3C177.2,336.9,178.4,335.1,179,332.5z"/>
+                                <path d="M869.2,248.1l-7.1-7.5l-0.8,0.9l-0.7-0.7l0.9-0.9l-6.2-6.6c0,0-105-109.8-157.4-164.8c-4.4-4.6-4.4-4.6-6.4,1.4c-14.6,44.9-19.4,91-18.1,138c1.2,43.4,8.6,85.8,20.5,127.4c0.7,2.4,2,4,4,5.4c9.3,6.7,27.9,20.3,27.9,20.3l9.9,7.2l6.6-6.7l0.7,0.7l-6.5,6.6l1.1,0.8c9.6,6.9,9.5,7,18.2-1.7c37.8-37.6,75.6-75.1,113.6-112.5C872.3,252.4,872.3,250.6,869.2,248.1z"/>
+                            </g>
                         </svg>
 
                         <!-- Centered Estampa/Print graphic element inside the shirt container -->
@@ -426,6 +476,11 @@
 
         </div>
     </section>
+    <!-- ============================================================
+         SECCIÓN NOSOTROS (Líneas ~424-495)
+         Historia de marca, valores (envíos rápidos, garantía),
+         blockquote de misión y estadísticas (10K+ clientes, 500+ Funkos).
+    ============================================================ -->
     <section id="nosotros" class="py-24 bg-brand-darkBg border-t border-brand-accentGray/40 relative">
         <div class="max-w-7xl mx-auto px-4 lg:px-8">
             
@@ -498,6 +553,11 @@
 
         </div>
     </section>
+    <!-- ============================================================
+         SECCIÓN CONTACTO (Líneas ~496-613)
+         Información de tiendas (2 ubicaciones en Lima),
+         datos de contacto, redes sociales y formulario de consultas.
+    ============================================================ -->
     <section id="contacto" class="py-24 bg-brand-darkCard/60 border-t border-brand-accentGray/40 relative">
         <!-- Gradiente radial decorativo -->
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,69,0,0.06),transparent_40%)] pointer-events-none"></div>
@@ -616,36 +676,63 @@
 
         </div>
     </section>
+    <!-- ============================================================
+         FOOTER (Líneas ~614-643)
+         Logo, enlaces rápidos de navegación, links legales y copyright.
+         Desktop: 3 columnas (logo | nav | legal)
+         Móvil: apilado verticalmente
+    ============================================================ -->
     <footer class="bg-brand-darkBg border-t border-brand-accentGray/60 py-12">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
             
-            <div class="flex items-center gap-3">
-                <!--img src="logo tecnogamers-01.jpg" alt="[Imagen de Logotipo de Pie de Página]" class="w-10 h-10 object-contain rounded-lg border border-brand-orange/30" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=100&q=80';"-->
-                <!--div>
-                    <span class="font-orbitron font-extrabold text-white text-base">TECNO <span class="text-brand-orange">GAMERS</span></span>
-                    <p class="text-[10px] text-gray-500 font-tech uppercase -mt-1">Technology Games Shop | © 2026</p>
-                </div-->
-
-                <div class="logo-tecno">
-                        <img src="images/logo_tecnogamers_1_f_oscuro.png" alt="logo tecnogamers" class="h-14 sm:h-16 md:h-20">
+            <!-- Grid principal: 1 col en móvil, 3 cols en md+ -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start">
+                
+                <!-- COLUMNA 1: Logo + nombre de marca -->
+                <div class="flex flex-col items-center md:items-start gap-3">
+                    <img src="images/logo_tecnogamers_1_f_oscuro.png" alt="logo tecnogamers" class="h-14 sm:h-16 md:h-18">
+                    <p class="text-[11px] text-gray-500 font-tech uppercase tracking-wider text-center md:text-left">Technology Games Shop / Perú</p>
                 </div>
+
+                <!-- COLUMNA 2: Navegación rápida -->
+                <div class="flex flex-col items-center gap-3">
+                    <h4 class="font-orbitron font-bold text-xs text-white uppercase tracking-widest">Navegación</h4>
+                    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-tech text-xs uppercase tracking-wider text-gray-400">
+                        <a href="#inicio" class="hover:text-brand-orange transition-colors">Inicio</a>
+                        <a href="#productos" class="hover:text-brand-orange transition-colors">Productos</a>
+                        <a href="#camisetas" class="hover:text-brand-orange transition-colors">Camisetas</a>
+                        <a href="#nosotros" class="hover:text-brand-orange transition-colors">Nosotros</a>
+                        <a href="#contacto" class="hover:text-brand-orange transition-colors">Contacto</a>
+                    </div>
+                </div>
+
+                <!-- COLUMNA 3: Legal + Copyright -->
+                <div class="flex flex-col items-center md:items-end gap-3">
+                    <h4 class="font-orbitron font-bold text-xs text-white uppercase tracking-widest">Legal</h4>
+                    <div class="flex flex-wrap justify-center md:justify-end gap-x-3 gap-y-1 text-[10px] text-gray-500">
+                        <a href="#" class="hover:text-gray-300 transition-colors">Términos y Condiciones</a>
+                        <span class="text-gray-700">|</span>
+                        <a href="#" class="hover:text-gray-300 transition-colors">Política de Privacidad</a>
+                        <span class="text-gray-700">|</span>
+                        <a href="#" class="hover:text-gray-300 transition-colors">Devoluciones</a>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Enlaces rápidos del footer (misma navegación que el header) -->
-            <div class="flex flex-wrap gap-6 font-tech text-sm uppercase tracking-wider text-gray-400">
-                <a href="#inicio" class="hover:text-brand-orange transition-colors">Inicio</a>
-                <a href="#productos" class="hover:text-brand-orange transition-colors">Productos</a>
-                <a href="#camisetas" class="hover:text-brand-orange transition-colors">Camisetas</a>
-                <a href="#nosotros" class="hover:text-brand-orange transition-colors">Nosotros</a>
-                <a href="#contacto" class="hover:text-brand-orange transition-colors">Contacto</a>
-            </div>
-
-            <div class="text-xs text-gray-500">
-                Todos los derechos reservados. Diseñado por y para Gamers en Perú.
+            <!-- Línea inferior: copyright -->
+            <div class="mt-8 pt-6 border-t border-brand-accentGray/40 text-center">
+                <p class="text-[10px] text-gray-600 font-tech uppercase tracking-wider">&copy; 2026 Tecno Gamers Peru. Todos los derechos reservados.</p>
             </div>
 
         </div>
     </footer>
+
+    <!-- ============================================================
+         CARRITO DE COMPRAS - Panel lateral derecho deslizante
+         Se abre con toggleCart(). En móvil ocupa 100% del ancho.
+         Contiene: header, lista de items (scroll), total y checkout WhatsApp.
+    ============================================================ -->
     <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-brand-darkBg border-l border-brand-accentGray z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
         
         <!-- Encabezado del carrito: título + botón cerrar -->
@@ -690,10 +777,16 @@
 
     </div>
 
-    <!-- Overlay del carrito -->
+    <!-- OVERLAY DEL CARRITO - Fondo oscuro semitransparente, click para cerrar -->
     <div id="cart-overlay" onclick="toggleCart()" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"></div>
 
-    <!-- MODAL DETALLE DE PRODUCTO -->
+    <!-- ============================================================
+         MODAL DETALLE DE PRODUCTO
+         Se abre al hacer clic en imagen o nombre de producto del catálogo.
+         Muestra: imagen, badge, nombre, descripción, precio, botones
+         de "Añadir al Carrito" y "Consultar por WhatsApp".
+         Se cierra con: botón X, overlay, o tecla ESC.
+    ============================================================ -->
     <div id="product-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300" onclick="closeProductModal()"></div>
         <div class="relative bg-brand-darkBg border border-brand-accentGray rounded-3xl w-full max-w-xl max-h-[85vh] overflow-y-auto shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modal-box">
@@ -703,12 +796,44 @@
             <div id="modal-content"></div>
         </div>
     </div>
+    <!-- TOAST CONTAINER - Notificaciones emergentes (éxito/info) -->
     <div id="toast-container" class="fixed bottom-20 right-6 z-50 space-y-3 pointer-events-none"></div>
+
+    <!-- BOTÓN "VOLVER ARRIBA" - Aparece al scrollear más de 400px -->
     <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-brand-orange hover:bg-brand-orangeHover text-white rounded-full flex items-center justify-center shadow-lg shadow-brand-orange/30 transition-all duration-300 border-2 border-brand-darkBg" title="Volver arriba">
         <i class="fa-solid fa-arrow-up text-lg"></i>
     </button>
     <script>
-        // === MODAL DETALLE DE PRODUCTO ===
+        /* ============================================================
+           JAVASCRIPT - LÓGICA PRINCIPAL DE LA APLICACIÓN
+           ============================================================
+
+           ESTRUCTURA DEL ARCHIVO:
+           -------------------------
+           16. Modal detalle de producto
+           1. Scroll suave personalizado (smoothScrollTo)
+           2. Interceptor de enlaces ancla
+           3. Botón "Volver arriba"
+           4. Base de datos de productos (PRODUCTS_DATABASE)
+           5. Estado global de la app (carrito, personalizador)
+           6. Inicialización al cargar página
+           7. Efecto navbar al scroll
+           8. Renderizado de productos (renderProducts)
+           9. Filtro por categoría (filterProducts)
+          10. Personalizador de camisetas (color, estampa, talla)
+          11. Lógica del carrito (add, remove, update, clear)
+          12. Sistema de notificaciones toast
+          13. Checkout por WhatsApp
+          14. Formulario de contacto
+          15. Menú móvil (hamburger)
+        ============================================================ */
+
+        // =============================================
+        // 16. MODAL DETALLE DE PRODUCTO
+        // showProductDetail(id): Abre modal con info del producto
+        // closeProductModal(): Cierra con animación suave (300ms)
+        // Se cierra también con tecla ESC
+        // =============================================
         function showProductDetail(productId) {
             const product = PRODUCTS_DATABASE.find(p => p.id === productId);
             if (!product) return;
@@ -774,8 +899,11 @@
             }
         });
 
-        // === SCROLL SUAVE PERSONALIZADO ===
+        // =============================================
+        // 1. SCROLL SUAVE PERSONALIZADO
         // Función principal: desplazamiento animado con easing cúbico (~1200ms)
+        // Reemplaza scroll-behavior: smooth del navegador para control total
+        // =============================================
         function smoothScrollTo(target) {
             const targetEl = document.querySelector(target);
             if (!targetEl) return;
@@ -807,8 +935,10 @@
             requestAnimationFrame(animation);
         }
 
-        // === INTERCEPTOR DE ENLACES ANCLA ===
+        // =============================================
+        // 2. INTERCEPTOR DE ENLACES ANCLA
         // Convierte todos los href="#seccion" en scrolls suaves animados
+        // =============================================
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
                 anchor.addEventListener('click', function(e) {
@@ -821,7 +951,10 @@
             });
         });
 
-        // === BOTÓN "VOLVER ARRIBA" - Mostrar/ocultar según posición de scroll ===
+        // =============================================
+        // 3. BOTÓN "VOLVER ARRIBA"
+        // Se muestra/oculta según posición de scroll (> 400px)
+        // =============================================
         window.addEventListener('scroll', function() {
             const btn = document.getElementById('back-to-top');
             if (window.scrollY > 400) {
@@ -836,8 +969,11 @@
             smoothScrollTo('#inicio');
         }
 
-        // === BASE DE DATOS DE PRODUCTOS ===
-        // Catálogo completo: videojuegos, merchandising y camisetas con precios en Soles
+        // =============================================
+        // 4. BASE DE DATOS DE PRODUCTOS
+        // Catálogo completo: videojuegos, merchandising y camisetas
+        // Imágenes en: images/productos/
+        // =============================================
         const PRODUCTS_DATABASE = [
             {
                 id: 1,
@@ -913,8 +1049,10 @@
             }
         ];
 
-        // === ESTADO GLOBAL DE LA APLICACIÓN ===
-        // Variables de estado del carrito y personalizador de camisetas
+        // =============================================
+        // 5. ESTADO GLOBAL DE LA APLICACIÓN
+        // Variables de estado del carrito y personalizador
+        // =============================================
         let cart = [];
         let selectedTshirtColor = '#0D0D0D';
         let selectedTshirtColorName = 'Negro';
@@ -922,15 +1060,19 @@
         let selectedTshirtPrintName = 'Logo Oficial';
         let selectedTshirtSize = 'S';
 
-        // === INICIALIZACIÓN AL CARGAR LA PÁGINA ===
+        // =============================================
+        // 6. INICIALIZACIÓN AL CARGAR LA PÁGINA
         // Renderiza productos y activa efecto del navbar
+        // =============================================
         window.onload = function() {
             renderProducts('todos');
             initNavbarScrollEffect();
         };
 
-        // === EFECTO VISUAL DEL NAVBAR AL HACER SCROLL ===
-        // Agrega sombra y fondo más opaco cuando se scrollea más de 50px
+        // =============================================
+        // 7. EFECTO VISUAL DEL NAVBAR AL HACER SCROLL
+        // Agrega sombra y fondo más opaco cuando se scrollea > 50px
+        // =============================================
         function initNavbarScrollEffect() {
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
@@ -942,8 +1084,12 @@
             });
         }
 
-        // === RENDERIZADO DINÁMICO DE PRODUCTOS ===
-        // Genera tarjetas HTML desde PRODUCTS_DATABASE y las inserta en el grid
+        // =============================================
+        // 8. RENDERIZADO DINÁMICO DE PRODUCTOS
+        // Genera tarjetas HTML desde PRODUCTS_DATABASE
+        // Cada tarjeta tiene: imagen, badge, nombre, descripción, precio, botón carrito
+        // Click en imagen/nombre abre modal de detalle
+        // =============================================
         function renderProducts(categoryFilter = 'todos') {
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
@@ -989,8 +1135,10 @@
             });
         }
 
-        // === FILTRO POR CATEGORÍA (Tabs del catálogo) ===
-        // Actualiza estilo visual de pestañas y re-renderiza productos filtrados
+        // =============================================
+        // 9. FILTRO POR CATEGORÍA (Tabs del catálogo)
+        // Actualiza estilo visual de pestañas y re-renderiza productos
+        // =============================================
         function filterProducts(category) {
             // Update tabs classes
             document.querySelectorAll('.filter-tab').forEach(tab => {
@@ -1005,8 +1153,12 @@
             renderProducts(category);
         }
 
-        // === PERSONALIZADOR DE CAMISETAS ===
-        // Cambiar color de la camiseta SVG
+        // =============================================
+        // 10. PERSONALIZADOR DE CAMISETAS
+        // - changeShirtColor(): Cambia color del SVG
+        // - changeShirtPrint(): Cambia imagen de estampa superpuesta
+        // - selectTshirtSize(): Selecciona talla (S, M, L, XL)
+        // =============================================
         function changeShirtColor(colorHex, colorName) {
             selectedTshirtColor = colorHex;
             selectedTshirtColorName = colorName;
@@ -1064,8 +1216,16 @@
             showToast(`Talla seleccionada: ${size}`, "info");
         }
 
-        // === LÓGICA DEL CARRITO DE COMPRAS ===
-        // Abrir/cerrar panel deslizante del carrito
+        // =============================================
+        // 11. LÓGICA DEL CARRITO DE COMPRAS
+        // - toggleCart(): Abre/cierra panel deslizante
+        // - updateCartUI(): Actualiza items, total y badge
+        // - addToCart(): Agrega producto del catálogo
+        // - addCustomShirtToCart(): Agrega camiseta personalizada
+        // - incrementItem/decrementItem: Modifica cantidad
+        // - removeItem: Elimina un item
+        // - clearCart(): Vacía todo el carrito
+        // =============================================
         function toggleCart() {
             const drawer = document.getElementById('cart-drawer');
             const overlay = document.getElementById('cart-overlay');
@@ -1203,8 +1363,10 @@
             showToast("Pedido vaciado", "info");
         }
 
-        // === SISTEMA DE NOTIFICACIONES TOAST ===
-        // Muestra mensajes emergentes (éxito/info) que desaparecen después de 3 segundos
+        // =============================================
+        // 12. SISTEMA DE NOTIFICACIONES TOAST
+        // Muestra mensajes emergentes (éxito/info) que desaparecen a los 3 segundos
+        // =============================================
         function showToast(message, type = "success") {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
@@ -1239,8 +1401,11 @@
             }, 3000);
         }
 
-        // === CHECKOUT VIA WHATSAPP ===
-        // Genera mensaje formateado con el pedido y abre WhatsApp con el número de la tienda
+        // =============================================
+        // 13. CHECKOUT POR WHATSAPP
+        // Genera mensaje formateado con el pedido y abre WhatsApp
+        // Número de tienda: wa.me/51999999999
+        // =============================================
         function checkoutViaWhatsApp() {
             if (cart.length === 0) {
                 showToast("Por favor, añade al menos un producto antes de checkout", "info");
@@ -1273,8 +1438,10 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // === FORMULARIO DE CONTACTO ===
-        // Previene envío real, resetea campos y muestra confirmación toast
+        // =============================================
+        // 14. FORMULARIO DE CONTACTO
+        // Previene envío real, resetea campos y muestra toast de confirmación
+        // =============================================
         function handleFormSubmit(event) {
             event.preventDefault();
             // Reset form
@@ -1282,8 +1449,11 @@
             showToast("¡Mensaje recibido! Nos comunicaremos contigo por WhatsApp de inmediato.", "success");
         }
 
-        // === MENÚ MÓVIL (Hamburger drawer) ===
-        // Abre/cierra el menú desplegable en pantallas pequeñas
+        // =============================================
+        // 15. MENÚ MÓVIL (Hamburger drawer)
+        // Abre/cierra el menú desplegable en pantallas < 768px
+        // Cierra automáticamente al redimensionar a desktop
+        // =============================================
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
